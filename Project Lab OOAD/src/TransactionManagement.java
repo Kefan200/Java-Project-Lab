@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,13 +17,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.mysql.jdbc.PreparedStatement;
+
 
 public class TransactionManagement extends JInternalFrame implements MouseListener,ActionListener{
 
@@ -40,7 +43,7 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 	Date transactiondate=new Date();
 	public TransactionManagement() {
 		
-		con=new Connect();
+//		con=new Connect();
 		//Initialize component
 		northPanel = new JPanel();
 		southPanel = new JPanel();
@@ -117,11 +120,13 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 		
 		dtm=new DefaultTableModel(column,0);
 		
-		con.rs=con.execQuery("SELECT * FROM transactionmanagement");
+//		con.rs=con.execQuery("SELECT * FROM transactionmanagement");
 		
 		try {
+			PreparedStatement ps=Connect.getInstance().prepareStatement("SELECT * FROM transactionmanagement");
+			ResultSet rs=ps.executeQuery();
 			//majuin cursor satu baris dari baris sebelumnya
-			while(con.rs.next()) {
+			while(rs.next()) {
 				rowData =new Vector<>(); 
 				
 				//Cara Pertama
@@ -130,10 +135,10 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 //				}
 				
 				//Cara Kedua
-				int id=con.rs.getInt("productid");
-				int quantity=con.rs.getInt("productquantity");
-				String method=con.rs.getString("productmethod");
-				String date=con.rs.getString("transactiondate");
+				int id=rs.getInt("productid");
+				int quantity=rs.getInt("productquantity");
+				String method=rs.getString("productmethod");
+				String date=rs.getString("transactiondate");
 				rowData.add(id);
 				rowData.add(quantity);
 				rowData.add(method);
@@ -189,15 +194,52 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
             String strDate = dateFormat.format(transactiondate);
 			//Date date=
-			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
+//			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
 			
-			con.execUpdate(query);
+			try {
+				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO transactionmanagement "+"(id,quantity,method,strDate) VALUES (?,?,?,?)");
+				ps.setInt(1,id);
+				ps.setInt(2,quantity);
+				ps.setString(3,method);
+				ps.setString(4,strDate);
+				ps.executeUpdate();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	
+			JOptionPane.showMessageDialog(null, "Inserted!");
 			refreshTable();
-			
+			productidField.setText("");
 			productquantityField.setText("");
+			
 	//		employeestatusField.setText("");
 		}else if(e.getSource()==updateButton){
+			int id=Integer.parseInt(productidField.getText());
+			int quantity=Integer.parseInt(productquantityField.getText());
+			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+            String strDate = dateFormat.format(transactiondate);
+			//Date date=
+//			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
+			
+			try {
+				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee\"+\"SET quantity=?,method=?,strDate=? WHERE id=?");
+				ps.setInt(1,id);
+				ps.setInt(2,quantity);
+				ps.setString(3,method);
+				ps.setString(4,strDate);
+				ps.executeUpdate();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	
+			JOptionPane.showMessageDialog(null, "Updated!");
+			refreshTable();
+			productidField.setText("");
+			productquantityField.setText("");
+			
 
 		}else if(e.getSource()==deleteButton) {
 			
