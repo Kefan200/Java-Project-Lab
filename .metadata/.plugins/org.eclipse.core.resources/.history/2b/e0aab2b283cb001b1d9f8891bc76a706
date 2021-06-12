@@ -35,7 +35,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 	String status[]= {"Active", "Not Active"};
 	JComboBox employeestatusbox=new JComboBox(status);
 
-//	Connect con;
+	Connect con;
 	
 	public HumanResourceManagement() {
 		
@@ -146,7 +146,6 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 			
 			dtm.addRow(rowData);
 		}
-		table.setModel(dtm);
 	//	con.rs=con.execQuery("SELECT * FROM employee");
 		
 		
@@ -221,34 +220,34 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==insertButton) {
-//			String role=employeeroleField.getText();
-//			String name=employeenameField.getText();
-//			String username=employeeusernameField.getText();
-//			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
-//			int salary=Integer.parseInt(employeesalaryField.getText());
-//			
-//		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
-//			try {
-//				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee "+"(role, name, username,status,salary) VALUES (?,?,?,?,?)");
-//				ps.setString(1, role);
-//				ps.setString(2, name);
-//				ps.setString(3, username);
-//				ps.setString(4, status);
-//				ps.setInt(5, salary);
-//				ps.executeUpdate();
-//				JOptionPane.showMessageDialog(null, "Inserted!");
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-////			con.execUpdate(query);
-//			refreshTable();
-//			
-//			employeeroleField.setText("");
-//			employeenameField.setText("");
-//			employeeusernameField.setText("");
-//	//		employeestatusField.setText("");
-//			employeesalaryField.setText("");
+			String role=employeeroleField.getText();
+			String name=employeenameField.getText();
+			String username=employeeusernameField.getText();
+			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
+			int salary=Integer.parseInt(employeesalaryField.getText());
+			
+		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
+			try {
+				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee "+"(role, name, username,status,salary) VALUES (?,?,?,?,?)");
+				ps.setString(1, role);
+				ps.setString(2, name);
+				ps.setString(3, username);
+				ps.setString(4, status);
+				ps.setInt(5, salary);
+				ps.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Inserted!");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+//			con.execUpdate(query);
+			refreshTable();
+			
+			employeeroleField.setText("");
+			employeenameField.setText("");
+			employeeusernameField.setText("");
+	//		employeestatusField.setText("");
+			employeesalaryField.setText("");
 		}else if(e.getSource()==updateButton){
 			int id=Integer.parseInt(employeeidField.getText());
 			String role=employeeroleField.getText();
