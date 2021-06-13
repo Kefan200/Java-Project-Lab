@@ -79,20 +79,4 @@ public class Menu {
 		}
 		return null;
 	}
-	public boolean insert() {
-		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee "+"(role, name, username,status,salary) VALUES (?,?,?,?,?)");
-			ps.setString(1, role);
-			ps.setString(2, name);
-			ps.setString(3, username);
-			ps.setString(4, status);
-			ps.setInt(5, salary);
-			return ps.executeUpdate()==1;
-	//		return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
 }
