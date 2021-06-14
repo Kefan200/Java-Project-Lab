@@ -23,17 +23,17 @@ public class Connect {
 		}
 	}
 	
-//	public static void deleteMenu(int id) {
-//		try {
-//			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM employee WHERE id=?");
-//			ps.setInt(1, id);
-//			ps.executeUpdate();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		
-//		}
-//	}
+	public static void deleteMenu(int id) {
+		try {
+			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM employee WHERE id=?");
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		}
+	}
 //	public Connection con;
 //	//execute sql statement
 //	public Statement stat;

@@ -35,7 +35,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 	String status[]= {"Active", "Not Active"};
 	JComboBox employeestatusbox=new JComboBox(status);
 
-	Connect con;
+//	Connect con;
 	
 	public HumanResourceManagement() {
 		
@@ -133,44 +133,58 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 		
 		dtm=new DefaultTableModel(column,0);
 		
+		Vector<Menu> menus=MenuController.getAllMenus();
+		
+		for(Menu menu: menus) {
+			rowData=new Vector<>();
+			rowData.add(menu.getId());
+			rowData.add(menu.getRole());
+			rowData.add(menu.getName());
+			rowData.add(menu.getUsername());
+			rowData.add(menu.getStatus());
+			rowData.add(menu.getSalary());
+			
+			dtm.addRow(rowData);
+		}
+		table.setModel(dtm);
 	//	con.rs=con.execQuery("SELECT * FROM employee");
 		
 		
-		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("SELECT * FROM employee");
-			ResultSet rs=ps.executeQuery();
-			//majuin cursor satu baris dari baris sebelumnya
-			while(rs.next()) {
-				rowData =new Vector<>(); 
-				
-				//Cara Pertama
-//				for (int i = 1; i <= con.rsx`m.getColumnCount(); i++) {
-//					rowData.add(con.rs.getObject(i));
-//				}
-				
-				//Cara Kedua
-				int id=rs.getInt("employeeid");
-				String role=rs.getString("employeerole");
-				String name=rs.getString("employeename");
-				String username=rs.getString("employeeusername");
-				String status=rs.getString("employeestatus");
-				int salary=rs.getInt("employeesalary");
-				
-				rowData.add(id);
-				rowData.add(role);
-				rowData.add(name);
-				rowData.add(username);
-				rowData.add(status);
-				rowData.add(salary);
-				dtm.addRow(rowData);
-			}
-			//tambahin dalam jtable
-			table.setModel(dtm);
-			
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			PreparedStatement ps=Connect.getInstance().prepareStatement("SELECT * FROM employee");
+//			ResultSet rs=ps.executeQuery();
+//			//majuin cursor satu baris dari baris sebelumnya
+//			while(rs.next()) {
+//				rowData =new Vector<>(); 
+//				
+//				//Cara Pertama
+////				for (int i = 1; i <= con.rsx`m.getColumnCount(); i++) {
+////					rowData.add(con.rs.getObject(i));
+////				}
+//				
+//				//Cara Kedua
+//				int id=rs.getInt("employeeid");
+//				String role=rs.getString("employeerole");
+//				String name=rs.getString("employeename");
+//				String username=rs.getString("employeeusername");
+//				String status=rs.getString("employeestatus");
+//				int salary=rs.getInt("employeesalary");
+//				
+//				rowData.add(id);
+//				rowData.add(role);
+//				rowData.add(name);
+//				rowData.add(username);
+//				rowData.add(status);
+//				rowData.add(salary);
+//				dtm.addRow(rowData);
+//			}
+//			//tambahin dalam jtable
+//			table.setModel(dtm);
+//			
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 	}
 
 	@Override
@@ -212,29 +226,37 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 			String username=employeeusernameField.getText();
 			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
 			int salary=Integer.parseInt(employeesalaryField.getText());
-			
-		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
-			try {
-				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee "+"(role, name, username,status,salary) VALUES (?,?,?,?,?)");
-				ps.setString(1, role);
-				ps.setString(2, name);
-				ps.setString(3, username);
-				ps.setString(4, status);
-				ps.setInt(5, salary);
-				ps.executeUpdate();
+			boolean isInserted=MenuController.insertMenu(role, name, username, status, salary);
+			if(isInserted) {
+				refreshTable();
+				
+				employeeroleField.setText("");
+				employeenameField.setText("");
+				employeeusernameField.setText("");
+		//		employeestatusField.setText("");
+				employeesalaryField.setText("");
 				JOptionPane.showMessageDialog(null, "Inserted!");
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			}else {
+				String errorMessage=MenuController.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
-//			con.execUpdate(query);
-			refreshTable();
-			
-			employeeroleField.setText("");
-			employeenameField.setText("");
-			employeeusernameField.setText("");
-	//		employeestatusField.setText("");
-			employeesalaryField.setText("");
+//			
+//		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
+//			try {
+//				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee "+"(role, name, username,status,salary) VALUES (?,?,?,?,?)");
+//				ps.setString(1, role);
+//				ps.setString(2, name);
+//				ps.setString(3, username);
+//				ps.setString(4, status);
+//				ps.setInt(5, salary);
+//				ps.executeUpdate();
+
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+////			con.execUpdate(query);
+
 		}else if(e.getSource()==updateButton){
 			int id=Integer.parseInt(employeeidField.getText());
 			String role=employeeroleField.getText();
@@ -245,13 +267,15 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 			
 		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
 			try {
-				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE menu"+"SET role=?,name=?,username=?,status=?,salary=? WHERE id=?");
+				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee"+"SET role=?,name=?,username=?,status=?,salary=? WHERE id=?");
 				ps.setString(1, role);
 				ps.setString(2, name);
 				ps.setString(3, username);
 				ps.setString(4, status);
 				ps.setInt(5, salary);
 				ps.setInt(6, id);
+				ps.executeUpdate();
+				
 				JOptionPane.showMessageDialog(null, "Updated!");
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -266,7 +290,21 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 	//		employeestatusField.setText("");
 			employeesalaryField.setText("");
 		}else if(e.getSource()==deleteButton) {
-			
+			int id=Integer.parseInt(employeeidField.getText());
+			try {
+				
+				
+				int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
+				if(confirmDelete!=1) {
+//					PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM employee WHERE id=?");
+//					ps.setInt(1, id);
+//					ps.executeUpdate();
+					Connect.deleteMenu(id);
+				}
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 

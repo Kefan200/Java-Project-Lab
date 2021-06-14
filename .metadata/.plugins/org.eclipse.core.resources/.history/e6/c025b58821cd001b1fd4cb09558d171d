@@ -119,7 +119,4 @@ public class MenuController {
 	public static HumanResourceManagement showHumanResourceManagement() {
 		return new HumanResourceManagement();
 	}
-	public static HomePage showHomeFrame() {
-		return new HomePage();
-	}
 }

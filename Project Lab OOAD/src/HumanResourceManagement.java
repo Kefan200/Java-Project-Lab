@@ -221,11 +221,25 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==insertButton) {
-//			String role=employeeroleField.getText();
-//			String name=employeenameField.getText();
-//			String username=employeeusernameField.getText();
-//			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
-//			int salary=Integer.parseInt(employeesalaryField.getText());
+			String role=employeeroleField.getText();
+			String name=employeenameField.getText();
+			String username=employeeusernameField.getText();
+			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
+			String salary=employeesalaryField.getText();
+			boolean isInserted=MenuController.insertMenu(role, name, username, status, salary);
+			if(isInserted) {
+				refreshTable();
+				
+				employeeroleField.setText("");
+				employeenameField.setText("");
+				employeeusernameField.setText("");
+		//		employeestatusField.setText("");
+				employeesalaryField.setText("");
+				JOptionPane.showMessageDialog(null, "Inserted!");
+			}else {
+				String errorMessage=MenuController.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
 //			
 //		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
 //			try {
@@ -236,67 +250,79 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 //				ps.setString(4, status);
 //				ps.setInt(5, salary);
 //				ps.executeUpdate();
-//				JOptionPane.showMessageDialog(null, "Inserted!");
+
 //			} catch (SQLException e1) {
 //				// TODO Auto-generated catch block
 //				e1.printStackTrace();
 //			}
 ////			con.execUpdate(query);
-//			refreshTable();
-//			
-//			employeeroleField.setText("");
-//			employeenameField.setText("");
-//			employeeusernameField.setText("");
-//	//		employeestatusField.setText("");
-//			employeesalaryField.setText("");
+
 		}else if(e.getSource()==updateButton){
-			int id=Integer.parseInt(employeeidField.getText());
+//			int id=Integer.parseInt(employeeidField.getText());
+			String id=employeeidField.getText();
 			String role=employeeroleField.getText();
 			String name=employeenameField.getText();
 			String username=employeeusernameField.getText();
 			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
-			int salary=Integer.parseInt(employeesalaryField.getText());
+			String salary=employeesalaryField.getText();
 			
-		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
-			try {
-				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee"+"SET role=?,name=?,username=?,status=?,salary=? WHERE id=?");
-				ps.setString(1, role);
-				ps.setString(2, name);
-				ps.setString(3, username);
-				ps.setString(4, status);
-				ps.setInt(5, salary);
-				ps.setInt(6, id);
-				ps.executeUpdate();
+			if(MenuController.updateMenu(id, role, name, username, status, salary)) {
+				refreshTable();
 				
+				employeeroleField.setText("");
+				employeenameField.setText("");
+				employeeusernameField.setText("");
+		//		employeestatusField.setText("");
+				employeesalaryField.setText("");
 				JOptionPane.showMessageDialog(null, "Updated!");
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			}else {
+				String errorMessage=MenuController.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
-//			con.execUpdate(query);
-			refreshTable();
-			
-			employeeroleField.setText("");
-			employeenameField.setText("");
-			employeeusernameField.setText("");
-	//		employeestatusField.setText("");
-			employeesalaryField.setText("");
+		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
+//			try {
+//				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee"+"SET role=?,name=?,username=?,status=?,salary=? WHERE id=?");
+//				ps.setString(1, role);
+//				ps.setString(2, name);
+//				ps.setString(3, username);
+//				ps.setString(4, status);
+//				ps.setInt(5, salary);
+//				ps.setInt(6, id);
+//				ps.executeUpdate();
+//				
+
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+////			con.execUpdate(query);
+
 		}else if(e.getSource()==deleteButton) {
-			int id=Integer.parseInt(employeeidField.getText());
-			try {
-				
-				
-				int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
-				if(confirmDelete!=1) {
-//					PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM employee WHERE id=?");
-//					ps.setInt(1, id);
-//					ps.executeUpdate();
-					Connect.deleteMenu(id);
-				}
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+//			int id=Integer.parseInt(employeeidField.getText());
+			String id=employeeidField.getText();
+			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
+			if(confirmDelete!=JOptionPane.YES_OPTION) {
+				return;
 			}
+			if(MenuController.deleteMenu(id)){
+				employeeroleField.setText("");
+				employeenameField.setText("");
+				employeeusernameField.setText("");
+		//		employeestatusField.setText("");
+				employeesalaryField.setText("");
+				JOptionPane.showMessageDialog(null, "Deleted!");
+			}else {
+				String errorMessage=MenuController.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
+//			try {
+//				
+//				
+
+//			} catch (Exception e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
 		}
 	}
 

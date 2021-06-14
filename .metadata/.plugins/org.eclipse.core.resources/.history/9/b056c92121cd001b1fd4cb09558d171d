@@ -104,8 +104,7 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 			if(humanResourceManagement != null) {
 				humanResourceManagement.dispose();
 			}
-//			add(humanResourceManagement = new HumanResourceManagement());
-			add(humanResourceManagement=MenuController.showHumanResourceManagement()); 
+			add(humanResourceManagement = new HumanResourceManagement());
 		}
 		if(e.getSource()==transactionManagementMenu) {
 			System.out.println("Transaction Management\n");

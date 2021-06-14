@@ -111,16 +111,4 @@ public class Menu {
 		}
 		return false;
 	}
-	public boolean delete() {
-		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM employee WHERE id=?");
-			ps.setInt(1, id);
-			
-			return ps.executeUpdate()==1;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
 }
