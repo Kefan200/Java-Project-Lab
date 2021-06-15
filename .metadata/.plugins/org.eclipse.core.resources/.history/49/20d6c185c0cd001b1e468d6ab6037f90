@@ -1,0 +1,12 @@
+import java.util.Vector;
+
+public class MenuControllerProductManagement {
+
+	public MenuControllerProductManagement() {
+		// TODO Auto-generated constructor stub
+	}
+	public static Vector<MenuProductManagement> getAllMenus(){
+		MenuProductManagement menuproductmanagement=new MenuProductManagement();
+		return menuproductmanagement.getAll();
+	}
+}

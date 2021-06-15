@@ -33,7 +33,7 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 	
 	Vector<Object>rowData;
 	
-	Connect con;
+//	Connect con;
 	
 	public ProductManagement() {
 		

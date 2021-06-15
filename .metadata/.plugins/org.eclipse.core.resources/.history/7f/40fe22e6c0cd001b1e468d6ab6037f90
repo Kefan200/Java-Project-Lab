@@ -1,0 +1,51 @@
+import java.util.Vector;
+
+public class MenuControllerProductManagement {
+
+	public MenuControllerProductManagement() {
+		// TODO Auto-generated constructor stub
+	}
+	public static Vector<MenuProductManagement> getAllMenus(){
+		MenuProductManagement menuproductmanagement=new MenuProductManagement();
+		return menuproductmanagement.getAll();
+	}
+	public static boolean insertMenu(String name,String description,String price,String stock) {
+		int parsedPrice;
+		if(role.isBlank()) {
+			errorMessage="Role must be filled!";
+			return false;
+		}else if(name.isBlank()) {
+			errorMessage="Name must be filled!";
+			return false;
+		}else if(username.isBlank()) {
+			errorMessage="Username must be filled!";
+			return false;
+		}else if(status.isBlank()) {
+			errorMessage="Status must be filled!";
+			return false;
+		}
+//		else if(salary==0) {
+//			errorMessage="Salary must be filled!";
+//			return false;
+//		}
+		try {
+			parsedPrice=Integer.parseInt(price);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			errorMessage="Salary must be integer!";
+			return false;
+		}
+		Menu menu=new Menu();
+		menu.setRole(role);
+		menu.setName(name);
+		menu.setUsername(username);
+		menu.setStatus(status);
+		menu.setSalary(parsedSalary);
+		if(!menu.insert()) {
+			errorMessage="Insert failed!";
+			return false;
+		}	
+		return true;
+	}
+}

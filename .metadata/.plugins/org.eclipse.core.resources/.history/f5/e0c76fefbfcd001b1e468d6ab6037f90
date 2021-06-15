@@ -1,0 +1,8 @@
+
+public class MenuControllerProductManagement {
+
+	public MenuControllerProductManagement() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
