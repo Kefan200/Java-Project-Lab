@@ -90,6 +90,7 @@ public class MenuController {
 		menu.setId(parsedId);
 		menu.setRole(role);
 		menu.setName(username);
+		menu.setUsername(username);
 		menu.setStatus(status);
 		menu.setSalary(parsedSalary);
 		if(!menu.update()) {

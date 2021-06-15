@@ -5,6 +5,7 @@ public class Main {
 		// TODO Auto-generated constructor stub
 //		HomePage hf=new HomePage();
 		MenuController.showHomeFrame();
+		MenuControllerProductManagement.showHomeFrame();
 //		Connect con=new Connect(); 
 	}
 

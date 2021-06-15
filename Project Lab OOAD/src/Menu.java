@@ -81,7 +81,7 @@ public class Menu {
 	}
 	public boolean insert() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee "+"(role, name, username,status,salary) VALUES (?,?,?,?,?)");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee VALUES (null,?,?,?,?,?)");
 			ps.setString(1, role);
 			ps.setString(2, name);
 			ps.setString(3, username);
@@ -97,7 +97,7 @@ public class Menu {
 	}
 	public boolean update() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee"+"SET role=?,name=?,username=?,status=?,salary=? WHERE id=?");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee SET employeerole=?,employeename=?,employeeusername=?,employeestatus=?,employeesalary=? WHERE employeeid=?");
 			ps.setString(1, role);
 			ps.setString(2, name);
 			ps.setString(3, username);
@@ -113,7 +113,7 @@ public class Menu {
 	}
 	public boolean delete() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM employee WHERE id=?");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM employee WHERE employeeid=?");
 			ps.setInt(1, id);
 			
 			return ps.executeUpdate()==1;

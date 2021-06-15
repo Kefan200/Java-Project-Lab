@@ -80,7 +80,7 @@ public class MenuProductManagement {
 				int price=rs.getInt("productprice");
 				int stock=rs.getInt("productstock");
 				
-				MenuProductManagement menuproductmanagement=new MenuProductManagement(id,name,description,price,stock);
+				MenuProductManagement menuproductmanagement=new MenuProductManagement(id, price, stock, name, description);
 				menus.add(menuproductmanagement);
 			}
 			return menus;

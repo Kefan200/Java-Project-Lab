@@ -12,6 +12,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -37,7 +38,7 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 	
 	public ProductManagement() {
 		
-		con=new Connect();
+//		con=new Connect();
 		//Initialize component
 		northPanel = new JPanel();
 		southPanel = new JPanel();
@@ -125,39 +126,45 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 		
 		dtm=new DefaultTableModel(column,0);
 		
-		con.rs=con.execQuery("SELECT * FROM product");
+//		con.rs=con.execQuery("SELECT * FROM product");
+		Vector<MenuProductManagement>menus=MenuControllerProductManagement.getAllMenus();
 		
-		try {
-			//majuin cursor satu baris dari baris sebelumnya
-			while(con.rs.next()) {
-				rowData =new Vector<>(); 
-				
-				//Cara Pertama
-//				for (int i = 1; i <= con.rsm.getColumnCount(); i++) {
-//					rowData.add(con.rs.getObject(i));
-//				}
-				
-				//Cara Kedua
-				int id=con.rs.getInt("productid");
-				String name=con.rs.getString("productname");
-				String description=con.rs.getString("productdescription");
-				int price=con.rs.getInt("productprice");
-				int stock=con.rs.getInt("productstock");
-				
-				rowData.add(id);
-				rowData.add(name);
-				rowData.add(description);
-				rowData.add(price);
-				rowData.add(stock);
-				dtm.addRow(rowData);
-			}
-			//tambahin dalam jtable
-			table.setModel(dtm);
-			
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		for(MenuProductManagement menuproductmanagement: menus) {
+			rowData=new Vector<>();
+			rowData.add(id);
+			rowData.add(name);
+			rowData.add(description);
+			rowData.add(price);
+			rowData.add(stock);
+			dtm.addRow(rowData);
 		}
+		table.setModel(dtm);
+//		try {
+//			//majuin cursor satu baris dari baris sebelumnya
+//			while(con.rs.next()) {
+//				rowData =new Vector<>(); 
+//				
+//				//Cara Pertama
+////				for (int i = 1; i <= con.rsm.getColumnCount(); i++) {
+////					rowData.add(con.rs.getObject(i));
+////				}
+//				
+//				//Cara Kedua
+//				int id=rs.getInt("productid");
+//				String name=rs.getString("productname");
+//				String description=con.rs.getString("productdescription");
+//				int price=con.rs.getInt("productprice");
+//				int stock=con.rs.getInt("productstock");
+//				
+//				
+//			}
+//			//tambahin dalam jtable
+//		
+//			
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 	}
 
 	@Override
@@ -197,35 +204,71 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 //			int id=Integer.parseInt(idField.getText());
 			String name=nameField.getText();
 			String description=descriptionField.getText();
-			int price=Integer.parseInt(priceField.getText());
-			int stock=Integer.parseInt(stockField.getText());
-			
-			String query =String.format("INSERT INTO product VALUES(null,'%s','%s',%d,%d)",name,description,price,stock);
-			
-			con.execUpdate(query);
-			refreshTable();
-			
-			nameField.setText("");
-			descriptionField.setText("");
-			priceField.setText("");
-			stockField.setText("");
+			String price=priceField.getText();
+			String stock=stockField.getText();
+			boolean isInserted=MenuControllerProductManagement.insertMenu(name,description,price,stock);
+//			String query =String.format("INSERT INTO product VALUES(null,'%s','%s',%d,%d)",name,description,price,stock);
+			if(isInserted) {
+				refreshTable();
+				
+				nameField.setText("");
+				descriptionField.setText("");
+				priceField.setText("");
+				stockField.setText("");
+				JOptionPane.showMessageDialog(null, "Inserted!");
+			}else {
+				String errorMessage=MenuController.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
+//			con.execUpdate(query);
+		
 		}else if(e.getSource()==updateButton){
-			int id=Integer.parseInt(idField.getText());
+			String id=idField.getText();
 			String name=nameField.getText();
 			String description=descriptionField.getText();
-			int price=Integer.parseInt(priceField.getText());
-			int stock=Integer.parseInt(stockField.getText());
-			
-		      
-			String query = String.format("update product set productname= '%s', productdescription='%s', productprice=%d,productstock=%d, where productid=%d",name,description,price,stock,id);
-//			PreparedStatement preparedStmt = con.prepareStatement(query);
-//		    preparedStmt.setInt   (1, 6000);
-//		    preparedStmt.setString(2, "Fred");
-		      
-		     con.execUpdate(query);
-		     refreshTable();
+			String price=priceField.getText();
+			String stock=stockField.getText();
+			boolean isInserted=MenuControllerProductManagement.insertMenu(name,description,price,stock);
+//			String query =String.format("INSERT INTO product VALUES(null,'%s','%s',%d,%d)",name,description,price,stock);
+			if(isInserted) {
+				refreshTable();
+				
+				nameField.setText("");
+				descriptionField.setText("");
+				priceField.setText("");
+				stockField.setText("");
+				JOptionPane.showMessageDialog(null, "Updated!");
+			}else {
+				String errorMessage=MenuController.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
+//			int id=Integer.parseInt(idField.getText());
+//			String name=nameField.getText();
+//			String description=descriptionField.getText();
+//			int price=Integer.parseInt(priceField.getText());
+//			int stock=Integer.parseInt(stockField.getText());
+//			
+//		      
+//			String query = String.format("update product set productname= '%s', productdescription='%s', productprice=%d,productstock=%d, where productid=%d",name,description,price,stock,id);
+////			PreparedStatement preparedStmt = con.prepareStatement(query);
+////		    preparedStmt.setInt   (1, 6000);
+////		    preparedStmt.setString(2, "Fred");
+//		      
+//		     con.execUpdate(query);
+//		     refreshTable();
 		}else if(e.getSource()==deleteButton) {
-			
+//			int id=Integer.parseInt(employeeidField.getText());
+			String id=idField.getText();
+			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
+			if(confirmDelete!=JOptionPane.YES_OPTION) {
+				return;
+			}
+			if(MenuController.deleteMenu(id)){
+				JOptionPane.showMessageDialog(null, "Deleted!");
+			}else {
+				String errorMessage=MenuController.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 
