@@ -120,52 +120,39 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 		
 		dtm=new DefaultTableModel(column,0);
 		
-		Vector<MenuTransactionManagement>menus=MenuControllerTransactionManagement.getAllMenus();
-		
-		for(MenuTransactionManagement menutransactionmanagement: menus) {
-			rowData.add(menutransactionmanagement.getId());
-			rowData.add(menutransactionmanagement.getQuantity());
-			rowData.add(menutransactionmanagement.getMethod());
-			rowData.add(menutransactionmanagement.getDate());
-			dtm.addRow(rowData);
-		}
-		//tambahin dalam jtable
-		table.setModel(dtm);
-	}
 //		con.rs=con.execQuery("SELECT * FROM transactionmanagement");
 		
-//		try {
-//			PreparedStatement ps=Connect.getInstance().prepareStatement("SELECT * FROM transactionmanagement");
-//			ResultSet rs=ps.executeQuery();
-//			//majuin cursor satu baris dari baris sebelumnya
-//			while(rs.next()) {
-//				rowData =new Vector<>(); 
-//				
-//				//Cara Pertama
-////				for (int i = 1; i <= con.rsx`m.getColumnCount(); i++) {
-////					rowData.add(con.rs.getObject(i));
-////				}
-//				
-//				//Cara Kedua
-//				int id=rs.getInt("productid");
-//				int quantity=rs.getInt("productquantity");
-//				String method=rs.getString("productmethod");
-//				String date=rs.getString("transactiondate");
-//				rowData.add(id);
-//				rowData.add(quantity);
-//				rowData.add(method);
-//				rowData.add(date);
-//				dtm.addRow(rowData);
-//			}
-//		try {
-//			
-//			
-//			
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//	}
+		try {
+			PreparedStatement ps=Connect.getInstance().prepareStatement("SELECT * FROM transactionmanagement");
+			ResultSet rs=ps.executeQuery();
+			//majuin cursor satu baris dari baris sebelumnya
+			while(rs.next()) {
+				rowData =new Vector<>(); 
+				
+				//Cara Pertama
+//				for (int i = 1; i <= con.rsx`m.getColumnCount(); i++) {
+//					rowData.add(con.rs.getObject(i));
+//				}
+				
+				//Cara Kedua
+				int id=rs.getInt("productid");
+				int quantity=rs.getInt("productquantity");
+				String method=rs.getString("productmethod");
+				String date=rs.getString("transactiondate");
+				rowData.add(id);
+				rowData.add(quantity);
+				rowData.add(method);
+				rowData.add(date);
+				dtm.addRow(rowData);
+			}
+			//tambahin dalam jtable
+			table.setModel(dtm);
+			
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -201,45 +188,30 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==insertButton) {
-			String id=productidField.getText();
-			String quantity=productquantityField.getText();
+			int id=Integer.parseInt(productidField.getText());
+			int quantity=Integer.parseInt(productquantityField.getText());
 			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-			String strDate = dateFormat.format(transactiondate);
-			boolean isInserted=MenuControllerTransactionManagement.insertMenu(id,quantity,method,strDate);
-			if(isInserted) {
-				refreshTable();
-				productidField.setText("");
-				productquantityField.setText("");
-				JOptionPane.showMessageDialog(null, "Inserted!");
-			}else {
-				String errorMessage=MenuController.errorMessage;
-				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+            String strDate = dateFormat.format(transactiondate);
+			//Date date=
+//			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
+			
+			try {
+				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO transactionmanagement "+"(id,quantity,method,strDate) VALUES (?,?,?,?)");
+				ps.setInt(1,id);
+				ps.setInt(2,quantity);
+				ps.setString(3,method);
+				ps.setString(4,strDate);
+				ps.executeUpdate();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-//			String id=productidField.getText();
-//			STring quantity=productquantityField.getText();
-//			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
-//			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-//            String strDate = dateFormat.format(transactiondate);
-//			//Date date=
-////			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
-//			
-//			try {
-//				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO transactionmanagement "+"(id,quantity,method,strDate) VALUES (?,?,?,?)");
-//				ps.setInt(1,id);
-//				ps.setInt(2,quantity);
-//				ps.setString(3,method);
-//				ps.setString(4,strDate);
-//				ps.executeUpdate();
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//	
-//			JOptionPane.showMessageDialog(null, "Inserted!");
-//			refreshTable();
-//			productidField.setText("");
-//			productquantityField.setText("");
+	
+			JOptionPane.showMessageDialog(null, "Inserted!");
+			refreshTable();
+			productidField.setText("");
+			productquantityField.setText("");
 			
 	//		employeestatusField.setText("");
 		}else if(e.getSource()==updateButton){

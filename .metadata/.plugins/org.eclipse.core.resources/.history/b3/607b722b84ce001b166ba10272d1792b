@@ -10,17 +10,8 @@ public class MenuControllerTransactionManagement {
 		MenuTransactionManagement menutransactionmanagement=new MenuTransactionManagement();
 		return menutransactionmanagement.getAll();
 	}
-	public static boolean insertMenu(String id,String quantity, String method, String date) {
-		int parsedId;
+	public static boolean insertMenu(String quantity, String method, String date) {
 		int parsedQuantity;
-		try {
-			parsedId=Integer.parseInt(id);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-			errorMessage="ID must be integer!";
-			return false;
-		}
 		try {
 			parsedQuantity=Integer.parseInt(quantity);
 		} catch (NumberFormatException e) {
@@ -36,7 +27,6 @@ public class MenuControllerTransactionManagement {
 
 		
 		MenuTransactionManagement menutransactionmanagement=new MenuTransactionManagement();
-		menutransactionmanagement.setId(parsedId);
 		menutransactionmanagement.setQuantity(parsedQuantity);
 		menutransactionmanagement.setMethod(method);
 		menutransactionmanagement.setDate(date);

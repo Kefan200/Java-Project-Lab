@@ -113,7 +113,7 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 			if(transactionManagement != null) {
 				transactionManagement.dispose();
 			}
-			add(transactionManagement = MenuControllerTransactionManagement.showTransactionManagement());
+			add(transactionManagement = new TransactionManagement());
 		}
 		
 	}

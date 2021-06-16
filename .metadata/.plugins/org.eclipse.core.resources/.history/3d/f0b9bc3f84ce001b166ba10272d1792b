@@ -64,11 +64,10 @@ public class MenuTransactionManagement {
 	}
 	public boolean insert() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO transactionmanagement VALUES (?,?,?,?)");
-			ps.setInt(1, id);
-			ps.setInt(2, quantity);
-			ps.setString(3, method);
-			ps.setString(4, date);
+			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO transactionmanagement VALUES (null,?,?,?)");
+			ps.setInt(1, quantity);
+			ps.setString(2, method);
+			ps.setString(3, date);
 			return ps.executeUpdate()==1;
 	//		return true;
 		} catch (SQLException e) {
