@@ -1,0 +1,8 @@
+
+public class MenuControllerTransactionManagement {
+
+	public MenuControllerTransactionManagement() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

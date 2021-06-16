@@ -92,7 +92,7 @@ public class MenuProductManagement {
 	}
 	public boolean insert() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO product "+"(name,description,price,stock) VALUES (?,?,?,?)");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO product VALUES (null,?,?,?,?)");
 			ps.setString(1, name);
 			ps.setString(2, description);
 			ps.setInt(3, price);
@@ -107,7 +107,7 @@ public class MenuProductManagement {
 	}
 	public boolean update() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE product"+"SET name=?,description=?,price=?,stock=? WHERE id=?");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE product SET productname=?,productdescription=?,productprice=?,productstock=? WHERE productid=?");
 			ps.setString(1, name);
 			ps.setString(2,description);
 			ps.setInt(3,price);
@@ -122,7 +122,7 @@ public class MenuProductManagement {
 	}
 	public boolean delete() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM product WHERE id=?");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM product WHERE productid=?");
 			ps.setInt(1, id);
 			
 			return ps.executeUpdate()==1;

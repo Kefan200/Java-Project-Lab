@@ -53,7 +53,8 @@ public class MenuControllerProductManagement {
 		}	
 		return true;
 	}
-	public static boolean updateMenu(String name,String description,String price,String stock) {
+	public static boolean updateMenu(String name,String description,String price,String id,String stock) {
+		int parsedId;
 		int parsedPrice;
 		int parsedStock;
 		if(name.isBlank()) {
@@ -77,6 +78,15 @@ public class MenuControllerProductManagement {
 			return false;
 		}
 		try {
+			parsedId=Integer.parseInt(id);
+			
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			errorMessage="Id must be integer!";
+			return false;
+		}
+		try {
 			parsedStock=Integer.parseInt(stock);
 			
 		} catch (NumberFormatException e) {
@@ -85,12 +95,14 @@ public class MenuControllerProductManagement {
 			errorMessage="Stock must be integer!";
 			return false;
 		}
+	
 		MenuProductManagement menuproductmanagement=new MenuProductManagement();
 		menuproductmanagement.setName(name);
 		menuproductmanagement.setDescription(description);
 		menuproductmanagement.setPrice(parsedPrice);
 		menuproductmanagement.setStock(parsedStock);
-		if(!menuproductmanagement.insert()) {
+		menuproductmanagement.setId(parsedId);
+		if(!menuproductmanagement.update()) {
 			errorMessage="Update failed!";
 			return false;
 		}	
@@ -106,9 +118,9 @@ public class MenuControllerProductManagement {
 			errorMessage="ID must be integer!";
 			return false;
 		}
-		Menu menu=new Menu();
-		menu.setId(parsedId);
-		if(!menu.delete()) {
+		MenuProductManagement menuproductmanagement=new MenuProductManagement();
+		menuproductmanagement.setId(parsedId);
+		if(!menuproductmanagement.delete()) {
 			errorMessage="Delete failed!";
 			return false;
 		}

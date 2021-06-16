@@ -131,11 +131,11 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 		
 		for(MenuProductManagement menuproductmanagement: menus) {
 			rowData=new Vector<>();
-			rowData.add(id);
-			rowData.add(name);
-			rowData.add(description);
-			rowData.add(price);
-			rowData.add(stock);
+			rowData.add(menuproductmanagement.getId());
+			rowData.add(menuproductmanagement.getName());
+			rowData.add(menuproductmanagement.getDescription());
+			rowData.add(menuproductmanagement.getPrice());
+			rowData.add(menuproductmanagement.getStock());
 			dtm.addRow(rowData);
 		}
 		table.setModel(dtm);
@@ -217,7 +217,7 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 				stockField.setText("");
 				JOptionPane.showMessageDialog(null, "Inserted!");
 			}else {
-				String errorMessage=MenuController.errorMessage;
+				String errorMessage=MenuControllerProductManagement.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
 //			con.execUpdate(query);
@@ -228,9 +228,9 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 			String description=descriptionField.getText();
 			String price=priceField.getText();
 			String stock=stockField.getText();
-			boolean isInserted=MenuControllerProductManagement.insertMenu(name,description,price,stock);
+			boolean isUpdated=MenuControllerProductManagement.updateMenu(name,description,price,id,stock);
 //			String query =String.format("INSERT INTO product VALUES(null,'%s','%s',%d,%d)",name,description,price,stock);
-			if(isInserted) {
+			if(isUpdated) {
 				refreshTable();
 				
 				nameField.setText("");
@@ -239,7 +239,7 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 				stockField.setText("");
 				JOptionPane.showMessageDialog(null, "Updated!");
 			}else {
-				String errorMessage=MenuController.errorMessage;
+				String errorMessage=MenuControllerProductManagement.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
 //			int id=Integer.parseInt(idField.getText());
@@ -263,10 +263,11 @@ public class ProductManagement extends JInternalFrame implements MouseListener,A
 			if(confirmDelete!=JOptionPane.YES_OPTION) {
 				return;
 			}
-			if(MenuController.deleteMenu(id)){
+			if(MenuControllerProductManagement.deleteMenu(id)){
+				refreshTable();
 				JOptionPane.showMessageDialog(null, "Deleted!");
 			}else {
-				String errorMessage=MenuController.errorMessage;
+				String errorMessage=MenuControllerProductManagement.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
 		}

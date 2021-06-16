@@ -1,0 +1,40 @@
+import java.util.Vector;
+
+public class MenuControllerTransactionManagement {
+	
+	public static String errorMessage;
+	public MenuControllerTransactionManagement() {
+		// TODO Auto-generated constructor stub
+	}
+	public static Vector<MenuTransactionManagement>getAllMenus(){
+		MenuTransactionManagement menutransactionmanagement=new MenuTransactionManagement();
+		return menutransactionmanagement.getAll();
+	}
+	public static boolean insertMenu(String quantity, String method, String date) {
+		int parsedQuantity;
+		try {
+			parsedQuantity=Integer.parseInt(quantity);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			errorMessage="Quantity must be integer!";
+			return false;
+		}
+		if(method.isBlank()) {
+			errorMessage="Method must be filled!";
+			return false;
+		}
+
+		
+		MenuTransactionManagement menutransactionmanagement=new MenuTransactionManagement();
+		menutransactionmanagement.setQuantity(parsedQuantity);
+		menutransactionmanagement.setMethod(method);
+		menutransactionmanagement.setDate(date);
+		if(!menutransactionmanagement.insert()) {
+			errorMessage="Insert failed!";
+			return false;
+		}	
+		return true;
+	}
+
+}
