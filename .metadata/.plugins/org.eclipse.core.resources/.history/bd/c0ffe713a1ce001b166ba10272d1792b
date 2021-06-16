@@ -123,7 +123,6 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 		Vector<MenuTransactionManagement>menus=MenuControllerTransactionManagement.getAllMenus();
 		
 		for(MenuTransactionManagement menutransactionmanagement: menus) {
-			rowData=new Vector<>();
 			rowData.add(menutransactionmanagement.getId());
 			rowData.add(menutransactionmanagement.getQuantity());
 			rowData.add(menutransactionmanagement.getMethod());
@@ -259,7 +258,7 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 
 				JOptionPane.showMessageDialog(null, "Updated!");
 			}else {
-				String errorMessage=MenuControllerTransactionManagement.errorMessage;
+				String errorMessage=MenuController.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
 //			try {
@@ -279,11 +278,11 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 			if(confirmDelete!=JOptionPane.YES_OPTION) {
 				return;
 			}
-			if(MenuControllerTransactionManagement.deleteMenu(id)){
+			if(MenuController.deleteMenu(id)){
 				refreshTable();
 				JOptionPane.showMessageDialog(null, "Deleted!");
 			}else {
-				String errorMessage=MenuControllerTransactionManagement.errorMessage;
+				String errorMessage=MenuController.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
 		}

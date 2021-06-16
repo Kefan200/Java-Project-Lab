@@ -50,7 +50,7 @@ public class MenuTransactionManagement {
 				int id=rs.getInt("productid");
 				int quantity=rs.getInt("productquantity");
 				String method=rs.getString("productmethod");
-				String date=rs.getString("transactiondate");
+				String date=rs.getString("productdate");
 				
 				MenuTransactionManagement menutransactionmanagement=new MenuTransactionManagement(id,quantity,method,date);
 				menus.add(menutransactionmanagement);
@@ -79,7 +79,7 @@ public class MenuTransactionManagement {
 	}
 	public boolean update() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE transactionmanagement SET productquantity=?,productmethod=?,transactiondate=? WHERE productid=?");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE transactionmanagement SET productquantity=?,productmethod=? WHERE productid=?");
 			ps.setInt(1, quantity);
 			ps.setString(2, method);
 			ps.setString(3, date);

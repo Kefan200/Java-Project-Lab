@@ -94,9 +94,9 @@ public class MenuControllerTransactionManagement {
 			errorMessage="ID must be integer!";
 			return false;
 		}
-		MenuTransactionManagement menutransactionmanagement=new MenuTransactionManagement();
-		menutransactionmanagement.setId(parsedId);
-		if(!menutransactionmanagement.delete()) {
+		Menu menu=new Menu();
+		menu.setId(parsedId);
+		if(!menu.delete()) {
 			errorMessage="Delete failed!";
 			return false;
 		}

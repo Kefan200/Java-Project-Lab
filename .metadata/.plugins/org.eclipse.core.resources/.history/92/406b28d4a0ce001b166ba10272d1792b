@@ -123,7 +123,6 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 		Vector<MenuTransactionManagement>menus=MenuControllerTransactionManagement.getAllMenus();
 		
 		for(MenuTransactionManagement menutransactionmanagement: menus) {
-			rowData=new Vector<>();
 			rowData.add(menutransactionmanagement.getId());
 			rowData.add(menutransactionmanagement.getQuantity());
 			rowData.add(menutransactionmanagement.getMethod());
@@ -244,48 +243,34 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 			
 	//		employeestatusField.setText("");
 		}else if(e.getSource()==updateButton){
-			String id=productidField.getText();
-			String quantity=productquantityField.getText();
+			int id=Integer.parseInt(productidField.getText());
+			int quantity=Integer.parseInt(productquantityField.getText());
 			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
             String strDate = dateFormat.format(transactiondate);
 			//Date date=
 //			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
-
-			if(MenuControllerTransactionManagement.updateMenu(id,quantity,method,strDate)) {
-				refreshTable();
-				productidField.setText("");
-				productquantityField.setText("");
-
-				JOptionPane.showMessageDialog(null, "Updated!");
-			}else {
-				String errorMessage=MenuControllerTransactionManagement.errorMessage;
-				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			
+			try {
+				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee\"+\"SET quantity=?,method=?,strDate=? WHERE id=?");
+				ps.setInt(1,id);
+				ps.setInt(2,quantity);
+				ps.setString(3,method);
+				ps.setString(4,strDate);
+				ps.executeUpdate();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-//			try {
-//				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee\"+\"SET quantity=?,method=?,strDate=? WHERE id=?");
-//				ps.setInt(1,id);
-//				ps.setInt(2,quantity);
-//				ps.setString(3,method);
-//				ps.setString(4,strDate);
-//				ps.executeUpdate();
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
+	
+			JOptionPane.showMessageDialog(null, "Updated!");
+			refreshTable();
+			productidField.setText("");
+			productquantityField.setText("");
+			
+
 		}else if(e.getSource()==deleteButton) {
-			String id=productidField.getText();
-			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
-			if(confirmDelete!=JOptionPane.YES_OPTION) {
-				return;
-			}
-			if(MenuControllerTransactionManagement.deleteMenu(id)){
-				refreshTable();
-				JOptionPane.showMessageDialog(null, "Deleted!");
-			}else {
-				String errorMessage=MenuControllerTransactionManagement.errorMessage;
-				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
-			}
+			
 		}
 	}
 

@@ -123,7 +123,6 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 		Vector<MenuTransactionManagement>menus=MenuControllerTransactionManagement.getAllMenus();
 		
 		for(MenuTransactionManagement menutransactionmanagement: menus) {
-			rowData=new Vector<>();
 			rowData.add(menutransactionmanagement.getId());
 			rowData.add(menutransactionmanagement.getQuantity());
 			rowData.add(menutransactionmanagement.getMethod());
