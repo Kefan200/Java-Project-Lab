@@ -26,10 +26,7 @@ public class MenuControllerProductManagement {
 //		}
 		try {
 			parsedPrice=Integer.parseInt(price);
-			if(parsedPrice<=0) {
-				errorMessage="Price must be above zero";
-				return false;
-			}
+			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -38,10 +35,7 @@ public class MenuControllerProductManagement {
 		}
 		try {
 			parsedStock=Integer.parseInt(stock);
-			if(parsedStock<=0) {
-				errorMessage="Stock must be above zero";
-				return false;
-			}
+			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -76,10 +70,7 @@ public class MenuControllerProductManagement {
 //		}
 		try {
 			parsedPrice=Integer.parseInt(price);
-			if(parsedPrice<=0) {
-				errorMessage="Price must be above zero";
-				return false;
-			}
+			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -97,10 +88,7 @@ public class MenuControllerProductManagement {
 		}
 		try {
 			parsedStock=Integer.parseInt(stock);
-			if(parsedStock<=0) {
-				errorMessage="Stock must be above zero";
-				return false;
-			}
+			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();

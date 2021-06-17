@@ -24,7 +24,7 @@ public class MenuController {
 		}else if(status.isBlank()) {
 			errorMessage="Status must be filled!";
 			return false;
-		}else if(!"Active".equals(status)&&!"Not Active".equals(status)) {
+		}else if(status!="Active"&&status!="Not Active") {
 			errorMessage="Status must be filled with Active or Not Active";
 			return false;
 		}
@@ -80,7 +80,7 @@ public class MenuController {
 			errorMessage="Status must be filled!";
 			return false;
 		}
-		else if(!"Active".equals(status)&&!"Not Active".equals(status)) {
+		else if(status!="Active"&&status!="Not Active") {
 			errorMessage="Status must be filled with Active or Not Active";
 			return false;
 		}
@@ -109,7 +109,7 @@ public class MenuController {
 		}
 		return true;
 	}
-	public static boolean deleteMenu(String id,String status) {
+	public static boolean deleteMenu(String id) {
 		int parsedId;
 		try {
 			parsedId=Integer.parseInt(id);
@@ -119,10 +119,8 @@ public class MenuController {
 			errorMessage="ID must be integer!";
 			return false;
 		}
-		status.equals("Not Active");
 		Menu menu=new Menu();
 		menu.setId(parsedId);
-		menu.setStatus(status);
 		if(!menu.delete()) {
 			errorMessage="Delete failed!";
 			return false;

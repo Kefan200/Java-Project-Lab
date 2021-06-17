@@ -304,12 +304,11 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 		}else if(e.getSource()==deleteButton) {
 //			int id=Integer.parseInt(employeeidField.getText());
 			String id=employeeidField.getText();
-			String status=employeestatusField.getText();
 			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
 			if(confirmDelete!=JOptionPane.YES_OPTION) {
 				return;
 			}
-			if(MenuController.deleteMenu(id,status)){
+			if(MenuController.deleteMenu(id)){
 				refreshTable();
 				employeeroleField.setText("");
 				employeenameField.setText("");

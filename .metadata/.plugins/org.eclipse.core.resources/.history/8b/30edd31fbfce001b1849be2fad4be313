@@ -109,7 +109,7 @@ public class MenuController {
 		}
 		return true;
 	}
-	public static boolean deleteMenu(String id,String status) {
+	public static boolean deleteMenu(String id) {
 		int parsedId;
 		try {
 			parsedId=Integer.parseInt(id);
@@ -119,10 +119,8 @@ public class MenuController {
 			errorMessage="ID must be integer!";
 			return false;
 		}
-		status.equals("Not Active");
 		Menu menu=new Menu();
 		menu.setId(parsedId);
-		menu.setStatus(status);
 		if(!menu.delete()) {
 			errorMessage="Delete failed!";
 			return false;

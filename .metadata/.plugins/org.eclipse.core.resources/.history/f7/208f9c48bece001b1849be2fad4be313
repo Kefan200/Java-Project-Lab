@@ -24,9 +24,6 @@ public class MenuController {
 		}else if(status.isBlank()) {
 			errorMessage="Status must be filled!";
 			return false;
-		}else if(!"Active".equals(status)&&!"Not Active".equals(status)) {
-			errorMessage="Status must be filled with Active or Not Active";
-			return false;
 		}
 //		else if(salary==0) {
 //			errorMessage="Salary must be filled!";
@@ -34,9 +31,6 @@ public class MenuController {
 //		}
 		try {
 			parsedSalary=Integer.parseInt(salary);
-			if(parsedSalary<=0) {
-				return false;
-			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -80,10 +74,6 @@ public class MenuController {
 			errorMessage="Status must be filled!";
 			return false;
 		}
-		else if(!"Active".equals(status)&&!"Not Active".equals(status)) {
-			errorMessage="Status must be filled with Active or Not Active";
-			return false;
-		}
 //		else if(salary==0) {
 //			errorMessage="Salary must be filled!";
 //			return false;
@@ -109,7 +99,7 @@ public class MenuController {
 		}
 		return true;
 	}
-	public static boolean deleteMenu(String id,String status) {
+	public static boolean deleteMenu(String id) {
 		int parsedId;
 		try {
 			parsedId=Integer.parseInt(id);
@@ -119,10 +109,8 @@ public class MenuController {
 			errorMessage="ID must be integer!";
 			return false;
 		}
-		status.equals("Not Active");
 		Menu menu=new Menu();
 		menu.setId(parsedId);
-		menu.setStatus(status);
 		if(!menu.delete()) {
 			errorMessage="Delete failed!";
 			return false;

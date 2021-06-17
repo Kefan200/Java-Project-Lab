@@ -29,11 +29,11 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 	JScrollPane scrollpane;
 	JLabel employeeid, employeerole, employeename, employeeusername,employeestatus,employeesalary;
 	//buat isi text
-	JTextField employeeidField, employeeroleField,employeenameField,employeeusernameField,employeesalaryField,employeestatusField;
+	JTextField employeeidField, employeeroleField,employeenameField,employeeusernameField,employeesalaryField;
 	JButton insertButton, updateButton, deleteButton;
 	Vector<Object>rowData;
 	String status[]= {"Active", "Not Active"};
-//	JComboBox employeestatusbox=new JComboBox(status);
+	JComboBox employeestatusbox=new JComboBox(status);
 
 //	Connect con;
 	
@@ -56,8 +56,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 		employeeroleField=new JTextField();
 		employeenameField=new JTextField();
 		employeeusernameField=new JTextField();
-//		employeestatusbox.setBounds(50, 50,90,20);
-		employeestatusField=new JTextField();
+		employeestatusbox.setBounds(50, 50,90,20);
 		employeesalaryField=new JTextField();
 		
 		insertButton=new JButton("Insert");
@@ -82,8 +81,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 		centerPanel.add(employeeusernameField);
 		
 		centerPanel.add(employeestatus);
-//		centerPanel.add(employeestatusbox);
-		centerPanel.add(employeestatusField);
+		centerPanel.add(employeestatusbox);
 		
 		centerPanel.add(employeesalary);
 		centerPanel.add(employeesalaryField);
@@ -226,8 +224,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 			String role=employeeroleField.getText();
 			String name=employeenameField.getText();
 			String username=employeeusernameField.getText();
-			String status=employeestatusField.getText();
-//			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
+			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
 			String salary=employeesalaryField.getText();
 			boolean isInserted=MenuController.insertMenu(role, name, username, status, salary);
 			if(isInserted) {
@@ -236,7 +233,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 				employeeroleField.setText("");
 				employeenameField.setText("");
 				employeeusernameField.setText("");
-				employeestatusField.setText("");
+		//		employeestatusField.setText("");
 				employeesalaryField.setText("");
 				JOptionPane.showMessageDialog(null, "Inserted!");
 			}else {
@@ -266,8 +263,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 			String role=employeeroleField.getText();
 			String name=employeenameField.getText();
 			String username=employeeusernameField.getText();
-//			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
-			String status=employeestatusField.getText();
+			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
 			String salary=employeesalaryField.getText();
 			
 			if(MenuController.updateMenu(id, role, name, username, status, salary)) {
@@ -276,7 +272,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 				employeeroleField.setText("");
 				employeenameField.setText("");
 				employeeusernameField.setText("");
-				employeestatusField.setText("");
+		//		employeestatusField.setText("");
 				employeesalaryField.setText("");
 				JOptionPane.showMessageDialog(null, "Updated!");
 			}else {
@@ -304,17 +300,16 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 		}else if(e.getSource()==deleteButton) {
 //			int id=Integer.parseInt(employeeidField.getText());
 			String id=employeeidField.getText();
-			String status=employeestatusField.getText();
 			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
 			if(confirmDelete!=JOptionPane.YES_OPTION) {
 				return;
 			}
-			if(MenuController.deleteMenu(id,status)){
+			if(MenuController.deleteMenu(id)){
 				refreshTable();
 				employeeroleField.setText("");
 				employeenameField.setText("");
 				employeeusernameField.setText("");
-				employeestatusField.setText("");
+		//		employeestatusField.setText("");
 				employeesalaryField.setText("");
 				JOptionPane.showMessageDialog(null, "Deleted!");
 			}else {

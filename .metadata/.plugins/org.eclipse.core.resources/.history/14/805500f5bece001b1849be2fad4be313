@@ -113,9 +113,8 @@ public class Menu {
 	}
 	public boolean delete() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee SET employeestatus=? WHERE employeeid=?");
-			ps.setString(1, status);
-			ps.setInt(2, id);
+			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee SET employeestatus=");
+			ps.setInt(1, id);
 			
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
