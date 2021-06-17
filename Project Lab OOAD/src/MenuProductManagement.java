@@ -56,26 +56,14 @@ public class MenuProductManagement {
 	public Vector<MenuProductManagement>getAll(){
 		Vector<MenuProductManagement>menus=new Vector<>();
 		try {
-//			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee");
-//			ResultSet rs = ps.executeQuery();
-//			
-//			while(rs.next()) {
-//				int id=rs.getInt("employeeid");
-//				String role=rs.getString("employeerole");
-//				String name=rs.getString("employeename");
-//				String username=rs.getString("employeeusername");
-//				String status=rs.getString("employeestatus");
-//				int salary=rs.getInt("employeesalary");
-//				
-//				Menu menu=new Menu(id,role,name,username,status,salary);
-//				menus.add(menu);
-//			}
+
 			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM product");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				int id=rs.getInt("productid");
 				String name=rs.getString("productname");
+				System.out.println(name);
 				String description=rs.getString("productdescription");
 				int price=rs.getInt("productprice");
 				int stock=rs.getInt("productstock");
@@ -91,20 +79,64 @@ public class MenuProductManagement {
 		return null;
 	}
 	public boolean insert() {
-		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO product VALUES (null,?,?,?,?)");
-			ps.setString(1, name);
-			ps.setString(2, description);
-			ps.setInt(3, price);
-			ps.setInt(4, stock);
-			return ps.executeUpdate()==1;
-	//		return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+//		try {
+//            PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM product");
+//            ResultSet rs = ps.executeQuery();
+//            while(rs.next()) {
+//                String productname=rs.getString("productname");
+//            }
+//            
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//            if(productname.equals(name)) 
+//            {
+//            	
+
+//            }
+//            else {
+//            	
+                try {
+					PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO product VALUES (null,?,?,?,?)");
+					ps.setString(1, name);
+					ps.setString(2, description);
+					ps.setInt(3, price);
+					ps.setInt(4, stock);
+					return ps.executeUpdate()==1;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                return false;
 	}
+//            }
+//    //        return true;
+//        } catch (SQLException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        return false;
+//		try {
+////			String query="INSERT INTO product VALUES (null,?,?,?,?) SELECT productname ";
+//			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM product");
+//			ResultSet rs = ps.executeQuery();
+//			String name=rs.getString("productname");
+//			ps=Connect.getInstance().prepareStatement("INSERT INTO product VALUES (null,?,?,?,?) ");
+//			ps.setString(1, name);
+//			ps.setString(2, description);
+//			ps.setInt(3, price);
+//			ps.setInt(4, stock);
+//			return ps.executeUpdate()==1;
+//	//		return true;
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return false;
+
+
 	public boolean update() {
 		try {
 			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE product SET productname=?,productdescription=?,productprice=?,productstock=? WHERE productid=?");

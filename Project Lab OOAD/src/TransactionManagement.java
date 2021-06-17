@@ -205,9 +205,10 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 			String id=productidField.getText();
 			String quantity=productquantityField.getText();
 			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-			String strDate = dateFormat.format(transactiondate);
-			boolean isInserted=MenuControllerTransactionManagement.insertMenu(id,quantity,method,strDate);
+//			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+//			String strDate = dateFormat.format(transactiondate);
+
+			boolean isInserted=MenuControllerTransactionManagement.insertMenu(id,quantity,method);
 			if(isInserted) {
 				refreshTable();
 				productidField.setText("");
@@ -247,12 +248,12 @@ public class TransactionManagement extends JInternalFrame implements MouseListen
 			String id=productidField.getText();
 			String quantity=productquantityField.getText();
 			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-            String strDate = dateFormat.format(transactiondate);
+//			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+//            String strDate = dateFormat.format(transactiondate);
 			//Date date=
 //			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
 
-			if(MenuControllerTransactionManagement.updateMenu(id,quantity,method,strDate)) {
+			if(MenuControllerTransactionManagement.updateMenu(id,quantity,method)) {
 				refreshTable();
 				productidField.setText("");
 				productquantityField.setText("");

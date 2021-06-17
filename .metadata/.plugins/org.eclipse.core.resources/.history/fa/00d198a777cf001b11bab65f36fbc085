@@ -1,0 +1,8 @@
+
+public class MenuControllerManager {
+
+	public MenuControllerManager() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

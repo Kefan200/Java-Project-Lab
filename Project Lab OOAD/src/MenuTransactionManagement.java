@@ -1,6 +1,7 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Vector;
 
 public class MenuTransactionManagement {
@@ -43,7 +44,7 @@ public class MenuTransactionManagement {
 	public Vector<MenuTransactionManagement>getAll(){
 		Vector<MenuTransactionManagement>menus=new Vector<>();
 		try {
-			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM transactionmanagement");
+			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM transaction");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -64,11 +65,13 @@ public class MenuTransactionManagement {
 	}
 	public boolean insert() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO transactionmanagement VALUES (?,?,?,?)");
+			java.util.Date date=new java.util.Date();
+			java.sql.Date sqlDate=new java.sql.Date(date.getTime());
+			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO transaction VALUES (?,?,?,?)");
 			ps.setInt(1, id);
 			ps.setInt(2, quantity);
 			ps.setString(3, method);
-			ps.setString(4, date);
+			ps.setDate(4, sqlDate);
 			return ps.executeUpdate()==1;
 	//		return true;
 		} catch (SQLException e) {
@@ -78,11 +81,13 @@ public class MenuTransactionManagement {
 		return false;
 	}
 	public boolean update() {
+		java.util.Date date=new java.util.Date();
+		java.sql.Date sqlDate=new java.sql.Date(date.getTime());
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE transactionmanagement SET productquantity=?,productmethod=?,transactiondate=? WHERE productid=?");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE transaction SET productquantity=?,productmethod=?,transactiondate=? WHERE productid=?");
 			ps.setInt(1, quantity);
 			ps.setString(2, method);
-			ps.setString(3, date);
+			ps.setDate(3, sqlDate);
 			ps.setInt(4, id);
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
@@ -93,7 +98,7 @@ public class MenuTransactionManagement {
 	}
 	public boolean delete() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM transactionmanagement WHERE productid=?");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("DELETE FROM transaction WHERE productid=?");
 			ps.setInt(1, id);
 			
 			return ps.executeUpdate()==1;

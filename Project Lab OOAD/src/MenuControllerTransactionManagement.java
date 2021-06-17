@@ -10,7 +10,7 @@ public class MenuControllerTransactionManagement {
 		MenuTransactionManagement menutransactionmanagement=new MenuTransactionManagement();
 		return menutransactionmanagement.getAll();
 	}
-	public static boolean insertMenu(String id,String quantity, String method, String date) {
+	public static boolean insertMenu(String id,String quantity, String method) {
 		int parsedId;
 		int parsedQuantity;
 		try {
@@ -39,14 +39,14 @@ public class MenuControllerTransactionManagement {
 		menutransactionmanagement.setId(parsedId);
 		menutransactionmanagement.setQuantity(parsedQuantity);
 		menutransactionmanagement.setMethod(method);
-		menutransactionmanagement.setDate(date);
+	//	menutransactionmanagement.setDate(date);
 		if(!menutransactionmanagement.insert()) {
 			errorMessage="Insert failed!";
 			return false;
 		}	
 		return true;
 	}
-	public static boolean updateMenu(String id, String quantity, String method, String date) {
+	public static boolean updateMenu(String id, String quantity, String method) {
 		int parsedId;
 		int parsedQuantity;
 		try {
@@ -68,16 +68,13 @@ public class MenuControllerTransactionManagement {
 		if(method.isBlank()) {
 			errorMessage="Method must be filled!";
 			return false;
-		}else if(date.isBlank()) {
-			errorMessage="Name must be filled!";
-			return false;
 		}
 
 		MenuTransactionManagement menutransactionmanagement=new MenuTransactionManagement();
 		menutransactionmanagement.setId(parsedId);
 		menutransactionmanagement.setQuantity(parsedQuantity);
 		menutransactionmanagement.setMethod(method);
-		menutransactionmanagement.setDate(date);
+//		menutransactionmanagement.setDate(date);
 		if(!menutransactionmanagement.update()) {
 			errorMessage="Update failed!";
 			return false;
