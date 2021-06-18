@@ -1,15 +1,59 @@
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.Vector;
 
-public class MenuController {
+public class MenuControllerManager {
 
 	public static String errorMessage;
-	public MenuController() {
+	public MenuControllerManager() {
 		// TODO Auto-generated constructor stub
 	}
-	public static Vector<Menu> getAllMenus(){
-		Menu menu=new Menu();
-		return menu.getAll();
+	public static Vector<MenuManager> getAllMenus(){
+		MenuManager menumanager=new MenuManager();
+		return menumanager.getAll();
 	}
+	public static Vector<MenuManager> entermonth(String month) {
+		int parsedMonth;
+//		try {
+			parsedMonth=Integer.parseInt(month);
+//			if(parsedMonth<=0) {
+//				return false;
+//			}
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="Month must be integer!";
+//			return false;
+//		}
+		Vector<MenuManager>menus=new Vector<>();
+		try {
+			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee");
+			ps=Connect.getInstance().prepareStatement("SELECT * FROM transactionmanagement");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				int id=rs.getInt("employeeid");
+				String role=rs.getString("employeerole");
+				String name=rs.getString("employeename");
+				String username=rs.getString("employeeusername");
+				String status=rs.getString("employeestatus");
+				int salary=rs.getInt("employeesalary");
+				Date date = rs.getDate("transactiondate");
+				
+				MenuManager menu=new MenuManager(id,role,name,username,status,salary);
+				menus.add(menu);
+			}
+			return menus;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+		
+	
+	
 	public static boolean insertMenu(String role, String name, String username, String status, String salary) {
 		int parsedSalary;
 		if(role.isBlank()) {
@@ -32,7 +76,6 @@ public class MenuController {
 //			errorMessage="Salary must be filled!";
 //			return false;
 //		}
-	
 		try {
 			parsedSalary=Integer.parseInt(salary);
 			if(parsedSalary<=0) {
@@ -44,14 +87,13 @@ public class MenuController {
 			errorMessage="Salary must be integer!";
 			return false;
 		}
-		Menu menu=new Menu();
-		menu.setRole(role);
-		menu.setName(name);
-		menu.setUsername(username);
-		menu.setStatus(status);
-		menu.setSalary(parsedSalary);
-		menu.setPassword(username);
-		if(!menu.insert()) {
+		MenuManager menumanager=new MenuManager();
+		menumanager.setRole(role);
+		menumanager.setName(name);
+		menumanager.setUsername(username);
+		menumanager.setStatus(status);
+		menumanager.setSalary(parsedSalary);
+		if(!menumanager.insert()) {
 			errorMessage="Insert failed!";
 			return false;
 		}	
@@ -60,7 +102,6 @@ public class MenuController {
 	public static boolean updateMenu(String id,String role, String name, String username, String status, String salary) {
 		int parsedId;
 		int parsedSalary;
-		String password=null;
 		try {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
@@ -99,15 +140,14 @@ public class MenuController {
 			errorMessage="Salary must be integer!";
 			return false;
 		}
-		Menu menu=new Menu();
-		menu.setId(parsedId);
-		menu.setRole(role);
-		menu.setName(username);
-		menu.setUsername(username);
-		menu.setStatus(status);
-		menu.setSalary(parsedSalary);
-		menu.setPassword(username);
-		if(!menu.update()) {
+		MenuManager menumanager=new MenuManager();
+		menumanager.setId(parsedId);
+		menumanager.setRole(role);
+		menumanager.setName(username);
+		menumanager.setUsername(username);
+		menumanager.setStatus(status);
+		menumanager.setSalary(parsedSalary);
+		if(!menumanager.update()) {
 			errorMessage="Update failed!";
 			return false;
 		}
@@ -124,17 +164,17 @@ public class MenuController {
 			return false;
 		}
 		status.equals("Not Active");
-		Menu menu=new Menu();
-		menu.setId(parsedId);
-		menu.setStatus(status);
-		if(!menu.delete()) {
+		MenuManager menumanager=new MenuManager();
+		menumanager.setId(parsedId);
+		menumanager.setStatus(status);
+		if(!menumanager.delete()) {
 			errorMessage="Delete failed!";
 			return false;
 		}
 		return true;
 	}
-	public static HumanResourceManagement showHumanResourceManagement() {
-		return new HumanResourceManagement();
+	public static Manager showManager() {
+		return new Manager();
 	}
 	public static HomePage showHomeFrame() {
 		return new HomePage();

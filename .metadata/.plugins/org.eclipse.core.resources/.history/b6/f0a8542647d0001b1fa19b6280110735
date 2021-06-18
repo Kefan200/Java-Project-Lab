@@ -48,8 +48,6 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 //		entermonth=new JLabel("Enter the month");
 		employeeid = new JLabel("ID");
 		employeerole = new JLabel("Role");
-		employeename = new JLabel("Name");
-		employeeusername = new JLabel("Username");
 		employeestatus=new JLabel("Status");
 		employeesalary=new JLabel("Salary");
 		

@@ -3,15 +3,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-public class MenuManager {
+public class Menu {
 	
 	private int id,salary;
 	private String role, name, username,status,password; 
-	public MenuManager() {
+	public Menu() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MenuManager(int id, int salary, String role, String name, String username, String status, String password) {
+	public Menu(int id, int salary, String role, String name, String username, String status, String password) {
 		super();
 		this.id = id;
 		this.salary = salary;
@@ -77,10 +77,11 @@ public class MenuManager {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Vector<MenuManager>getAll(){
-		Vector<MenuManager>menus=new Vector<>();
+
+	public Vector<Menu>getAll(){
+		Vector<Menu>menus=new Vector<>();
 		try {
-			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee ");
+			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -90,8 +91,8 @@ public class MenuManager {
 				String username=rs.getString("employeeusername");
 				String status=rs.getString("employeestatus");
 				int salary=rs.getInt("employeesalary");
-				String password=rs.getString("employeepassword");
-				MenuManager menu=new MenuManager(id, salary,role,name,username,status,password);
+				String password=rs.getString("emmployeepassword");
+				Menu menu=new Menu(id,salary,role, name,username,status,password);
 				menus.add(menu);
 			}
 			return menus;
@@ -101,9 +102,6 @@ public class MenuManager {
 		}
 		return null;
 	}
-//	public boolean entermonth() {
-//		
-//	}
 	public boolean insert() {
 		try {
 			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee VALUES (null,?,?,?,?,?,?)");
@@ -131,6 +129,7 @@ public class MenuManager {
 			ps.setInt(5, salary);
 			ps.setString(6, password);
 			ps.setInt(7, id);
+			
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

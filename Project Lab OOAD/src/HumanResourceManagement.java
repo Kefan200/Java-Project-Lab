@@ -52,6 +52,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 		employeestatus=new JLabel("Status");
 		employeesalary=new JLabel("Salary");
 		
+		
 		employeeidField=new JTextField();
 		employeeroleField=new JTextField();
 		employeenameField=new JTextField();
@@ -131,7 +132,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 	}
 
 	private void refreshTable() {
-		Object[] column = {"ID", "Role", "Name", "Username","Status","Salary"};
+		Object[] column = {"ID", "Role", "Name", "Username","Status","Salary","Password"};
 		
 		dtm=new DefaultTableModel(column,0);
 		
@@ -145,7 +146,7 @@ public class HumanResourceManagement extends JInternalFrame implements MouseList
 			rowData.add(menu.getUsername());
 			rowData.add(menu.getStatus());
 			rowData.add(menu.getSalary());
-			
+			rowData.add(menu.getPassword());
 			dtm.addRow(rowData);
 		}
 		table.setModel(dtm);

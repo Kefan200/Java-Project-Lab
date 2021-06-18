@@ -6,55 +6,78 @@ import java.util.Vector;
 public class Menu {
 	
 	private int id,salary;
-	private String role, name, username,status; 
+	private String role, name, username,status,password; 
 	public Menu() {
 		// TODO Auto-generated constructor stub
 	}
-	public Menu(int id, String role, String name, String username, String status, int salary) {
+
+	public Menu(int id, int salary, String role, String name, String username, String status, String password) {
 		super();
 		this.id = id;
+		this.salary = salary;
 		this.role = role;
 		this.name = name;
 		this.username = username;
 		this.status = status;
-		this.salary = salary;
+		this.password = password;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	public int getSalary() {
 		return salary;
 	}
+
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Vector<Menu>getAll(){
 		Vector<Menu>menus=new Vector<>();
 		try {
@@ -68,8 +91,8 @@ public class Menu {
 				String username=rs.getString("employeeusername");
 				String status=rs.getString("employeestatus");
 				int salary=rs.getInt("employeesalary");
-				
-				Menu menu=new Menu(id,role,name,username,status,salary);
+				String password=rs.getString("employeepassword");
+				Menu menu=new Menu(id,salary,role, name,username,status,password);
 				menus.add(menu);
 			}
 			return menus;
@@ -81,12 +104,13 @@ public class Menu {
 	}
 	public boolean insert() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee VALUES (null,?,?,?,?,?)");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee VALUES (null,?,?,?,?,?,?)");
 			ps.setString(1, role);
 			ps.setString(2, name);
 			ps.setString(3, username);
 			ps.setString(4, status);
 			ps.setInt(5, salary);
+			ps.setString(6, password);
 			return ps.executeUpdate()==1;
 	//		return true;
 		} catch (SQLException e) {
@@ -97,13 +121,15 @@ public class Menu {
 	}
 	public boolean update() {
 		try {
-			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee SET employeerole=?,employeename=?,employeeusername=?,employeestatus=?,employeesalary=? WHERE employeeid=?");
+			PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee SET employeerole=?,employeename=?,employeeusername=?,employeestatus=?,employeesalary=?,employeepassword=? WHERE employeeid=?");
 			ps.setString(1, role);
 			ps.setString(2, name);
 			ps.setString(3, username);
 			ps.setString(4, status);
 			ps.setInt(5, salary);
-			ps.setInt(6, id);
+			ps.setString(6, password);
+			ps.setInt(7, id);
+			
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

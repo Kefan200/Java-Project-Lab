@@ -12,6 +12,7 @@ public class MenuController {
 	}
 	public static boolean insertMenu(String role, String name, String username, String status, String salary) {
 		int parsedSalary;
+		String password=null;
 		if(role.isBlank()) {
 			errorMessage="Role must be filled!";
 			return false;
@@ -32,7 +33,7 @@ public class MenuController {
 //			errorMessage="Salary must be filled!";
 //			return false;
 //		}
-	
+		password.equals(username);
 		try {
 			parsedSalary=Integer.parseInt(salary);
 			if(parsedSalary<=0) {
@@ -50,7 +51,7 @@ public class MenuController {
 		menu.setUsername(username);
 		menu.setStatus(status);
 		menu.setSalary(parsedSalary);
-		menu.setPassword(username);
+		menu.setPassword(password);
 		if(!menu.insert()) {
 			errorMessage="Insert failed!";
 			return false;
@@ -91,6 +92,7 @@ public class MenuController {
 //			errorMessage="Salary must be filled!";
 //			return false;
 //		}
+		password.equals(username);
 		try {
 			parsedSalary=Integer.parseInt(salary);
 		} catch (NumberFormatException e) {
@@ -106,7 +108,7 @@ public class MenuController {
 		menu.setUsername(username);
 		menu.setStatus(status);
 		menu.setSalary(parsedSalary);
-		menu.setPassword(username);
+		menu.setPassword(password);
 		if(!menu.update()) {
 			errorMessage="Update failed!";
 			return false;

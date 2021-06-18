@@ -43,13 +43,11 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		//Initialize component
 		northPanel = new JPanel();
 		southPanel = new JPanel();
-		centerPanel= new JPanel(new GridLayout(6,2));
+		centerPanel= new JPanel(new GridLayout(7,2));
 		
 //		entermonth=new JLabel("Enter the month");
 		employeeid = new JLabel("ID");
 		employeerole = new JLabel("Role");
-		employeename = new JLabel("Name");
-		employeeusername = new JLabel("Username");
 		employeestatus=new JLabel("Status");
 		employeesalary=new JLabel("Salary");
 		

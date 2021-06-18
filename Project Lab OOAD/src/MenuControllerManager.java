@@ -1,6 +1,7 @@
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.util.Date;
 import java.util.Vector;
 
 public class MenuControllerManager {
@@ -13,44 +14,45 @@ public class MenuControllerManager {
 		MenuManager menumanager=new MenuManager();
 		return menumanager.getAll();
 	}
-	public static Vector<MenuManager> entermonth(String month) {
-		int parsedMonth;
+//	public static Vector<MenuManager> entermonth(String month) {
+//		int parsedMonth;
+////		try {
+//			parsedMonth=Integer.parseInt(month);
+////			if(parsedMonth<=0) {
+////				return false;
+////			}
+////		} catch (NumberFormatException e) {
+////			// TODO Auto-generated catch block
+//////			e.printStackTrace();
+////			errorMessage="Month must be integer!";
+////			return false;
+////		}
+//		Vector<MenuManager>menus=new Vector<>();
 //		try {
-			parsedMonth=Integer.parseInt(month);
-//			if(parsedMonth<=0) {
-//				return false;
+//			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee");
+//		//	ps=Connect.getInstance().prepareStatement("SELECT * FROM transactionmanagement");
+//			ResultSet rs = ps.executeQuery();
+//			while(rs.next()) {
+//				int id=rs.getInt("employeeid");
+//				String role=rs.getString("employeerole");
+//				String name=rs.getString("employeename");
+//				String username=rs.getString("employeeusername");
+//				String status=rs.getString("employeestatus");
+//				int salary=rs.getInt("employeesalary");
+//				String password=rs.getString(columnLabel)
+//	//			Date date = rs.getDate("transactiondate");
+//				
+//				MenuManager menu=new MenuManager(id,role,name,username,status,salary);
+//				menus.add(menu);
 //			}
-//		} catch (NumberFormatException e) {
+//			return menus;
+//		} catch (SQLException e) {
 //			// TODO Auto-generated catch block
-////			e.printStackTrace();
-//			errorMessage="Month must be integer!";
-//			return false;
+//			e.printStackTrace();
 //		}
-		Vector<MenuManager>menus=new Vector<>();
-		try {
-			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee");
-			Connect.getInstance().prepareStatement("SELECT * FROM transactionmanagement");
-			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				int id=rs.getInt("employeeid");
-				String role=rs.getString("employeerole");
-				String name=rs.getString("employeename");
-				String username=rs.getString("employeeusername");
-				String status=rs.getString("employeestatus");
-				int salary=rs.getInt("employeesalary");
-				
-				
-				MenuManager menu=new MenuManager(id,role,name,username,status,salary);
-				menus.add(menu);
-			}
-			return menus;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-		
+//		return null;
+//	}
+//		
 	
 	
 	public static boolean insertMenu(String role, String name, String username, String status, String salary) {
@@ -92,6 +94,7 @@ public class MenuControllerManager {
 		menumanager.setUsername(username);
 		menumanager.setStatus(status);
 		menumanager.setSalary(parsedSalary);
+		menumanager.setPassword(username);
 		if(!menumanager.insert()) {
 			errorMessage="Insert failed!";
 			return false;
@@ -146,6 +149,7 @@ public class MenuControllerManager {
 		menumanager.setUsername(username);
 		menumanager.setStatus(status);
 		menumanager.setSalary(parsedSalary);
+		menumanager.setPassword(username);
 		if(!menumanager.update()) {
 			errorMessage="Update failed!";
 			return false;
