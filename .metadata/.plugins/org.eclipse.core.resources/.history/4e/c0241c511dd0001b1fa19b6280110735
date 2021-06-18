@@ -30,7 +30,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 	JLabel employeeid, employeerole, employeename, employeeusername,employeestatus,employeesalary,entermonth;
 	//buat isi text
 	JTextField employeeidField, employeeroleField,employeenameField,employeeusernameField,employeesalaryField,employeestatusField,entermonthField;
-	JButton insertButton, updateButton, deleteButton,entermonthButton;
+	JButton insertButton, updateButton, deleteButton;
 	Vector<Object>rowData;
 	String status[]= {"Active", "Not Active"};
 //	JComboBox employeestatusbox=new JComboBox(status);
@@ -60,7 +60,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		employeestatusField=new JTextField();
 		employeesalaryField=new JTextField();
 		
-		entermonthButton=new JButton("Select month");
+	
 		insertButton=new JButton("Insert");
 		updateButton=new JButton("Update");
 		deleteButton=new JButton("Delete");
@@ -227,38 +227,6 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==entermonthButton) {
-			String month=entermonthField.getText();
-			boolean isInserted=MenuControllerManager.entermonth(month);
-			if(isInserted) {
-				refreshTable();
-				
-				entermonthField.setText("");
-				JOptionPane.showMessageDialog(null, "Inserted!");
-			}else {
-				String errorMessage=MenuControllerManager.errorMessage;
-				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
-			}
-			Object[] column = {"ID", "Role", "Name", "Username","Status","Salary"};
-			
-			dtm=new DefaultTableModel(column,0);
-			
-			Vector<MenuManager> menus=MenuControllerManager.getAllMenus();
-			
-			for(MenuManager menumanager: menus) {
-				rowData=new Vector<>();
-				rowData.add(menumanager.getId());
-				rowData.add(menumanager.getRole());
-				rowData.add(menumanager.getName());
-				rowData.add(menumanager.getUsername());
-				rowData.add(menumanager.getStatus());
-				rowData.add(menumanager.getSalary());
-				
-				dtm.addRow(rowData);
-			}
-			table.setModel(dtm);
-		}
-		
 		if(e.getSource()==insertButton) {
 			String role=employeeroleField.getText();
 			String name=employeenameField.getText();

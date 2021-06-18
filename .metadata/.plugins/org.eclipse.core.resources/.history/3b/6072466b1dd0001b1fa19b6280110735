@@ -58,7 +58,7 @@ public class MenuManager {
 	public Vector<MenuManager>getAll(){
 		Vector<MenuManager>menus=new Vector<>();
 		try {
-			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee ");
+			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -78,9 +78,6 @@ public class MenuManager {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	public boolean entermonth() {
-		
 	}
 	public boolean insert() {
 		try {

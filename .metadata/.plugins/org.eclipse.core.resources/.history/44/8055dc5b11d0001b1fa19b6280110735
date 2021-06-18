@@ -41,7 +41,7 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 		transactionManagementMenu=new JMenuItem("Transaction Management");
 		transactionManagementMenu.addActionListener(this);
 		
-		managerMenu=new JMenuItem("Manager");
+		managerMenu=new JMenuItem("Transaction Management");
 		managerMenu.addActionListener(this);
 		
 		homeMenu.add(productManagementMenu);
