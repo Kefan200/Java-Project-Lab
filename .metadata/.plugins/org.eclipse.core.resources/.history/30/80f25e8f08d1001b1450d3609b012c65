@@ -1,18 +1,18 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Vector;
 
-public class Menu {
+public class MenuManager {
 	
 	private int id,salary;
 	private String role, name, username,status,password; 
-	public static String errorMessage;
-	public Menu() {
+	public MenuManager() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Menu(int id, int salary, String role, String name, String username, String status, String password) {
+	public MenuManager(int id, int salary, String role, String name, String username, String status, String password) {
 		super();
 		this.id = id;
 		this.salary = salary;
@@ -78,13 +78,26 @@ public class Menu {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public Vector<Menu>getAll(){
-		Vector<Menu>menus=new Vector<>();
+	public Vector<MenuManager>getAll(){
+		Vector<MenuManager>menus=new Vector<>();
 		try {
-			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee");
+			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee ");
 			ResultSet rs = ps.executeQuery();
-			
+			PreparedStatement ps2= Connect.getInstance().prepareStatement("SELECT * FROM transaction ");
+			ResultSet rs2 = ps2.executeQuery();
+			while(rs2.next()) {
+				int id2=rs.getInt("productid");
+				int quantity2=rs.getInt("productquantity");
+				String method=rs.getString("productmethod");
+				String date2=rs.getString("transactiondate");
+				java.sql.Date dat = java.sql.Date.valueOf(date2);
+				//create calander instance and get required params
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(dat);
+				int month = cal.get(Calendar.MONTH);
+				int day = cal.get(Calendar.DAY_OF_MONTH);
+				int year = cal.get(Calendar.YEAR);
+			}
 			while(rs.next()) {
 				int id=rs.getInt("employeeid");
 				String role=rs.getString("employeerole");
@@ -93,7 +106,7 @@ public class Menu {
 				String status=rs.getString("employeestatus");
 				int salary=rs.getInt("employeesalary");
 				String password=rs.getString("employeepassword");
-				Menu menu=new Menu(id,salary,role, name,username,status,password);
+				MenuManager menu=new MenuManager(id, salary,role,name,username,status,password);
 				menus.add(menu);
 			}
 			return menus;
@@ -103,28 +116,10 @@ public class Menu {
 		}
 		return null;
 	}
+//	public boolean entermonth() {
+//		
+//	}
 	public boolean insert() {
-		try {
-			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM employee");
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				int id=rs.getInt("employeeid");
-				String role=rs.getString("employeerole");
-				String name=rs.getString("employeename");
-				String username2=rs.getString("employeeusername");
-				String status=rs.getString("employeestatus");
-				int salary=rs.getInt("employeesalary");
-				String password=rs.getString("employeepassword");
-				if(username.equals(username2)) {
-					errorMessage="Username has been inserted";
-				}
-			}
-	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		try {
 			PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee VALUES (null,?,?,?,?,?,?)");
 			ps.setString(1, role);
@@ -151,7 +146,6 @@ public class Menu {
 			ps.setInt(5, salary);
 			ps.setString(6, password);
 			ps.setInt(7, id);
-			
 			return ps.executeUpdate()==1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
