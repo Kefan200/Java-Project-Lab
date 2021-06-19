@@ -98,7 +98,6 @@ public class MenuProductManagement {
 //            }
 //            else {
 //            	
-			
                 try {
 					PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO product VALUES (null,?,?,?,?)");
 					ps.setString(1, name);

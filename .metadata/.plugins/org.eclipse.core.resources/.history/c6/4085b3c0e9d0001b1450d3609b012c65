@@ -84,7 +84,7 @@ public class MenuTransactionManagement {
 						PreparedStatement ps2=Connect.getInstance().prepareStatement("UPDATE transaction SET productquantity=? WHERE productid=?");
 						ps2.setInt(1, quantitytotal);
 						ps2.setInt(2, id);
-						return ps2.executeUpdate()==1;
+						return ps.executeUpdate()==1;
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

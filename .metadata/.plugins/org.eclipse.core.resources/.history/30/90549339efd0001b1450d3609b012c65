@@ -43,9 +43,9 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		//Initialize component
 		northPanel = new JPanel();
 		southPanel = new JPanel();
-		centerPanel= new JPanel(new GridLayout(7,2));
+		centerPanel= new JPanel(new GridLayout(6,2));
 		
-		entermonth=new JLabel("Enter the month");
+//		entermonth=new JLabel("Enter the month");
 		employeeid = new JLabel("ID");
 		employeerole = new JLabel("Role");
 		employeename = new JLabel("Name");
@@ -53,7 +53,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		employeestatus=new JLabel("Status");
 		employeesalary=new JLabel("Salary");
 		
-		entermonthField=new JTextField();
+//		entermonthField=new JTextField();
 		employeeidField=new JTextField();
 		employeeroleField=new JTextField();
 		employeenameField=new JTextField();
@@ -62,7 +62,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		employeestatusField=new JTextField();
 		employeesalaryField=new JTextField();
 		
-		entermonthButton=new JButton("Select month");
+	//	entermonthButton=new JButton("Select month");
 		insertButton=new JButton("Insert");
 		updateButton=new JButton("Update");
 		deleteButton=new JButton("Delete");
@@ -72,8 +72,8 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		updateButton.addActionListener(this);
 		deleteButton.addActionListener(this);
 		
-		centerPanel.add(entermonth);
-		centerPanel.add(entermonthField);
+//		centerPanel.add(entermonth);
+//		centerPanel.add(entermonthField);
 		
 		centerPanel.add(employeeid);
 		centerPanel.add(employeeidField);
@@ -231,7 +231,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		// TODO Auto-generated method stub
 //		if(e.getSource()==entermonthButton) {
 //			String month=entermonthField.getText();
-//			boolean isInserted=MenuControllerManager.entermonth(month);
+////			boolean isInserted=MenuControllerManager.entermonth(month);
 //			if(isInserted) {
 //				refreshTable();
 //				
@@ -241,7 +241,6 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 //				String errorMessage=MenuControllerManager.errorMessage;
 //				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 //			}
-//		}
 //			Object[] column = {"ID", "Role", "Name", "Username","Status","Salary"};
 //			
 //			dtm=new DefaultTableModel(column,0);
