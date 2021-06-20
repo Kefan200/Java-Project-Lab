@@ -10,6 +10,22 @@ public class MenuControllerManager {
 		MenuManager menumanager=new MenuManager();
 		return menumanager.getAll();
 	}
+	public static boolean entermonthMenu(String entermonth) {
+		int parsedentermonth;
+	
+		try {
+			parsedentermonth=Integer.parseInt(entermonth);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			errorMessage="ID must be integer!";
+			return false;
+		}
+	//	System.out.println(parsedentermonth);
+		MenuManager menumanager=new MenuManager();
+		menumanager.setEntermonth(parsedentermonth);
+		return true;
+	}
 	public static boolean insertMenu(String id,String quantity, String method) {
 		int parsedId;
 		int parsedQuantity;

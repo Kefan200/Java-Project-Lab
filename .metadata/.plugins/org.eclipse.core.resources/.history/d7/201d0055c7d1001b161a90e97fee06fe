@@ -1,0 +1,312 @@
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+
+
+public class Manager extends JInternalFrame implements MouseListener,ActionListener{
+
+	JPanel northPanel, southPanel,centerPanel;
+	JTable table;
+	DefaultTableModel dtm;
+	JScrollPane scrollpane;
+	JLabel productid, productquantity, productmethod,entermonth;
+	//buat isi text
+	JTextField productidField, productquantityField,entermonthField;
+	JButton insertButton, updateButton, deleteButton,entermonthButton;
+	Vector<Object>rowData;
+	String method[]= {"Credit", "Cash"};
+	JComboBox productmethodbox=new JComboBox(method);
+	Connect con;
+	Date transactiondate=new Date();
+	public Manager() {
+		
+//		con=new Connect();
+		//Initialize component
+		northPanel = new JPanel();
+		southPanel = new JPanel();
+		centerPanel= new JPanel(new GridLayout(4,2));
+		
+		entermonth=new JLabel("Enter month");
+		productid = new JLabel("ID");
+		productquantity = new JLabel("Quantity");
+		productmethod = new JLabel("Method");
+	
+		entermonthField=new JTextField();
+		productidField=new JTextField();
+		productquantityField=new JTextField();
+		productmethodbox.setBounds(50, 50, 90, 20);
+		
+		entermonthButton=new JButton("Enter month");
+		insertButton=new JButton("Insert");
+		updateButton=new JButton("Update");
+		deleteButton=new JButton("Delete");
+		
+		//ActionListener biar tombolnya bisa dipencet
+		insertButton.addActionListener(this);
+		updateButton.addActionListener(this);
+		deleteButton.addActionListener(this);
+		
+		centerPanel.add(entermonth);
+		centerPanel.add(entermonthField);
+		
+		centerPanel.add(productid);
+		centerPanel.add(productidField);
+		
+		centerPanel.add(productquantity);
+		centerPanel.add(productquantityField);
+		
+		centerPanel.add(productmethod);
+		centerPanel.add(productmethodbox);
+		
+		southPanel.add(entermonthButton);
+		southPanel.add(insertButton);
+		southPanel.add(updateButton);
+		southPanel.add(deleteButton);
+
+		table = new JTable(dtm);
+		refreshTable();
+		
+		table.addMouseListener(new MouseAdapter() {
+			 public void mouseClicked(MouseEvent e) {
+				 System.out.println("Table clicked");
+				 entermonth.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+				 productid.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
+				 productquantity.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+				 productmethod.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
+			 }
+		});
+		
+		scrollpane = new JScrollPane(table);
+		
+//		dtm.addRow(newData);
+//		dtm.insertRow(0, newData2);
+		
+		northPanel.add(scrollpane);
+		
+//		southPanel.add(id);
+//		southPanel.add(name);
+//		southPanel.add(type);
+//		southPanel.add(cuisine);
+		
+		this.setLayout(new BorderLayout());
+		
+		this.add(northPanel, BorderLayout.NORTH);
+		this.add(southPanel, BorderLayout.SOUTH);
+		this.add(centerPanel, BorderLayout.CENTER);
+		
+		this.setClosable(true);
+		this.setTitle("Manager View");
+		this.setVisible(true);
+	}
+
+	private void refreshTable() {
+		Object[] column = {"ID", "Quantity", "Method","Date"};
+		
+		dtm=new DefaultTableModel(column,0);
+
+		Vector<MenuManager>menus=MenuControllerManager.getAllMenus();
+		
+		for(MenuManager menumanager: menus) {
+			rowData=new Vector<>();
+			rowData.add(menumanager.getId());
+			rowData.add(menumanager.getQuantity());
+			rowData.add(menumanager.getMethod());
+			rowData.add(menumanager.getDate());
+			dtm.addRow(rowData);
+		}
+		//tambahin dalam jtable
+		table.setModel(dtm);
+	}
+//		con.rs=con.execQuery("SELECT * FROM transactionmanagement");
+		
+//		try {
+//			PreparedStatement ps=Connect.getInstance().prepareStatement("SELECT * FROM transactionmanagement");
+//			ResultSet rs=ps.executeQuery();
+//			//majuin cursor satu baris dari baris sebelumnya
+//			while(rs.next()) {
+//				rowData =new Vector<>(); 
+//				
+//				//Cara Pertama
+////				for (int i = 1; i <= con.rsx`m.getColumnCount(); i++) {
+////					rowData.add(con.rs.getObject(i));
+////				}
+//				
+//				//Cara Kedua
+//				int id=rs.getInt("productid");
+//				int quantity=rs.getInt("productquantity");
+//				String method=rs.getString("productmethod");
+//				String date=rs.getString("transactiondate");
+//				rowData.add(id);
+//				rowData.add(quantity);
+//				rowData.add(method);
+//				rowData.add(date);
+//				dtm.addRow(rowData);
+//			}
+//		try {
+//			
+//			
+//			
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==entermonthButton) {
+			String entermonth=entermonthField.getText();
+			boolean isInserted=MenuControllerManager.entermonthMenu(entermonth);
+			if(isInserted) {
+				refreshTable();
+				entermonthField.setText("");
+				JOptionPane.showMessageDialog(null, "Inserted!");
+			}else {
+				String errorMessage=MenuControllerManager.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if(e.getSource()==insertButton) {
+			String id=productidField.getText();
+			String quantity=productquantityField.getText();
+			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
+//			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+//			String strDate = dateFormat.format(transactiondate);
+
+			boolean isInserted=MenuControllerManager.insertMenu(id,quantity,method);
+			if(isInserted) {
+				refreshTable();
+				productidField.setText("");
+				productquantityField.setText("");
+				JOptionPane.showMessageDialog(null, "Inserted!");
+			}else {
+				String errorMessage=MenuControllerManager.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
+//			String id=productidField.getText();
+//			STring quantity=productquantityField.getText();
+//			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
+//			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+//            String strDate = dateFormat.format(transactiondate);
+//			//Date date=
+////			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
+//			
+//			try {
+//				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO transactionmanagement "+"(id,quantity,method,strDate) VALUES (?,?,?,?)");
+//				ps.setInt(1,id);
+//				ps.setInt(2,quantity);
+//				ps.setString(3,method);
+//				ps.setString(4,strDate);
+//				ps.executeUpdate();
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//	
+//			JOptionPane.showMessageDialog(null, "Inserted!");
+//			refreshTable();
+//			productidField.setText("");
+//			productquantityField.setText("");
+			
+	//		employeestatusField.setText("");
+		}else if(e.getSource()==updateButton){
+			String id=productidField.getText();
+			String quantity=productquantityField.getText();
+			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
+//			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+//            String strDate = dateFormat.format(transactiondate);
+			//Date date=
+//			String query =String.format("INSERT INTO transactionmanagement VALUES(%d,%d,'%s','%s')",id,quantity,method,strDate);
+
+			if(MenuControllerManager.updateMenu(id,quantity,method)) {
+				refreshTable();
+				productidField.setText("");
+				productquantityField.setText("");
+
+				JOptionPane.showMessageDialog(null, "Updated!");
+			}else {
+				String errorMessage=MenuControllerManager.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
+//			try {
+//				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee\"+\"SET quantity=?,method=?,strDate=? WHERE id=?");
+//				ps.setInt(1,id);
+//				ps.setInt(2,quantity);
+//				ps.setString(3,method);
+//				ps.setString(4,strDate);
+//				ps.executeUpdate();
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+		}else if(e.getSource()==deleteButton) {
+			String id=productidField.getText();
+			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
+			if(confirmDelete!=JOptionPane.YES_OPTION) {
+				return;
+			}
+			if(MenuControllerManager.deleteMenu(id)){
+				refreshTable();
+				JOptionPane.showMessageDialog(null, "Deleted!");
+			}else {
+				String errorMessage=MenuControllerManager.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+}

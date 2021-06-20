@@ -68,7 +68,7 @@ public class MenuTransactionManagement {
 		try {
 			PreparedStatement ps= Connect.getInstance().prepareStatement("SELECT * FROM transaction");
 			ResultSet rs = ps.executeQuery();
-			
+			System.out.println(quantity);
 			while(rs.next()) {
 				int id2=rs.getInt("productid");
 				int quantity2=rs.getInt("productquantity");

@@ -32,10 +32,10 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 	JTable table;
 	DefaultTableModel dtm;
 	JScrollPane scrollpane;
-	JLabel productid, productquantity, productmethod;
+	JLabel productid, productquantity, productmethod,entermonth;
 	//buat isi text
-	JTextField productidField, productquantityField;
-	JButton insertButton, updateButton, deleteButton;
+	JTextField productidField, productquantityField,entermonthField;
+	JButton insertButton, updateButton, deleteButton,entermonthButton;
 	Vector<Object>rowData;
 	String method[]= {"Credit", "Cash"};
 	JComboBox productmethodbox=new JComboBox(method);
@@ -47,25 +47,31 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		//Initialize component
 		northPanel = new JPanel();
 		southPanel = new JPanel();
-		centerPanel= new JPanel(new GridLayout(3,2));
+		centerPanel= new JPanel(new GridLayout(4,2));
 		
+		entermonth=new JLabel("Enter month");
 		productid = new JLabel("ID");
 		productquantity = new JLabel("Quantity");
 		productmethod = new JLabel("Method");
 	
-		
+		entermonthField=new JTextField();
 		productidField=new JTextField();
 		productquantityField=new JTextField();
 		productmethodbox.setBounds(50, 50, 90, 20);
 		
+		entermonthButton=new JButton("Enter month");
 		insertButton=new JButton("Insert");
 		updateButton=new JButton("Update");
 		deleteButton=new JButton("Delete");
 		
 		//ActionListener biar tombolnya bisa dipencet
+		entermonthButton.addActionListener(this);
 		insertButton.addActionListener(this);
 		updateButton.addActionListener(this);
 		deleteButton.addActionListener(this);
+		
+		centerPanel.add(entermonth);
+		centerPanel.add(entermonthField);
 		
 		centerPanel.add(productid);
 		centerPanel.add(productidField);
@@ -75,7 +81,8 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		
 		centerPanel.add(productmethod);
 		centerPanel.add(productmethodbox);
-			
+		
+		southPanel.add(entermonthButton);
 		southPanel.add(insertButton);
 		southPanel.add(updateButton);
 		southPanel.add(deleteButton);
@@ -86,9 +93,10 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		table.addMouseListener(new MouseAdapter() {
 			 public void mouseClicked(MouseEvent e) {
 				 System.out.println("Table clicked");
-				 productid.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
-				 productquantity.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
-				 productmethod.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+				 entermonth.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+				 productid.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
+				 productquantity.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+				 productmethod.setText(table.getValueAt(table.getSelectedRow(), 3).toString());
 			 }
 		});
 		
@@ -119,7 +127,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		Object[] column = {"ID", "Quantity", "Method","Date"};
 		
 		dtm=new DefaultTableModel(column,0);
-		
+
 		Vector<MenuManager>menus=MenuControllerManager.getAllMenus();
 		
 		for(MenuManager menumanager: menus) {
@@ -201,6 +209,18 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource()==entermonthButton) {
+			String entermonth=entermonthField.getText();
+			boolean isInserted=MenuControllerManager.entermonthMenu(entermonth);
+			if(isInserted) {
+				refreshTable();
+				entermonthField.setText("");
+				JOptionPane.showMessageDialog(null, "Inserted!");
+			}else {
+				String errorMessage=MenuControllerManager.errorMessage;
+				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
+			}
+		}
 		if(e.getSource()==insertButton) {
 			String id=productidField.getText();
 			String quantity=productquantityField.getText();
