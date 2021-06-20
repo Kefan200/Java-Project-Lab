@@ -479,7 +479,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		}
 		table.setModel(dtm);
 	
-	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -553,7 +553,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 
 		}else if(e.getSource()==updateButton){
 //			int id=Integer.parseInt(employeeidField.getText());
-			String id=employeeidField.getText();
+			String employeeid=employeeidField.getText();
 			String role=employeeroleField.getText();
 			String name=employeenameField.getText();
 			String username=employeeusernameField.getText();

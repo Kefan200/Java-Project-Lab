@@ -10,61 +10,169 @@ public class MenuControllerManager {
 		MenuManager menumanager=new MenuManager();
 		return menumanager.getAll();
 	}
-	public static boolean entermonthMenu(String entermonth) {
-		int parsedentermonth;
+//	public static boolean entermonthMenu(String entermonth) {
+//		int parsedentermonth;
+//	
+//		try {
+//			parsedentermonth=Integer.parseInt(entermonth);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="ID must be integer!";
+//			return false;
+//		}
+//	//	System.out.println(parsedentermonth);
+//		MenuManager menumanager=new MenuManager();
+//		menumanager.setEntermonth(parsedentermonth);
+//		return true;
+//	}
+//	public static boolean insertMenu(String id,String quantity, String method) {
+//		int parsedId;
+//		int parsedQuantity;
+//		try {
+//			parsedId=Integer.parseInt(id);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="ID must be integer!";
+//			return false;
+//		}
+//		try {
+//			parsedQuantity=Integer.parseInt(quantity);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="Quantity must be integer!";
+//			return false;
+//		}
+//		if(method.isBlank()) {
+//			errorMessage="Method must be filled!";
+//			return false;
+//		}
+//
+//		
+//		MenuManager menumanager=new MenuManager();
+//		menumanager.setId(parsedId);
+//		menumanager.setQuantity(parsedQuantity);
+//		menumanager.setMethod(method);
+//	//	menutransactionmanagement.setDate(date);
+//		if(!menumanager.insert()) {
+//			errorMessage="Insert failed!";
+//			return false;
+//		}	
+//		return true;
+//	}
+//	public static boolean updateMenu(String id, String quantity, String method) {
+//		int parsedId;
+//		int parsedQuantity;
+//		try {
+//			parsedId=Integer.parseInt(id);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="ID must be integer!";
+//			return false;
+//		}
+//		try {
+//			parsedQuantity=Integer.parseInt(quantity);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="Quantity must be integer!";
+//			return false;
+//		}
+//		if(method.isBlank()) {
+//			errorMessage="Method must be filled!";
+//			return false;
+//		}
+//
+//		MenuManager menumanager=new MenuManager();
+//		menumanager.setId(parsedId);
+//		menumanager.setQuantity(parsedQuantity);
+//		menumanager.setMethod(method);
+////		menutransactionmanagement.setDate(date);
+//		if(!menumanager.update()) {
+//			errorMessage="Update failed!";
+//			return false;
+//		}
+//		return true;
+//	}
+//	public static boolean deleteMenu(String id) {
+//		int parsedId;
+//		try {
+//			parsedId=Integer.parseInt(id);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="ID must be integer!";
+//			return false;
+//		}
+//		MenuManager menumanager=new MenuManager();
+//		menumanager.setId(parsedId);
+//		if(!menumanager.delete()) {
+//			errorMessage="Delete failed!";
+//			return false;
+//		}
+//		return true;
+//	}
+//	public static Manager showManager() {
+//		return new Manager();
+//	}
+//	public static HomePage showHomeFrame() {
+//		return new HomePage();
+//	}
+//}
+	public static boolean insertMenu(String role, String name, String username, String status, String salary) {
+		int parsedSalary;
+		if(role.isBlank()) {
+			errorMessage="Role must be filled!";
+			return false;
+		}else if(name.isBlank()) {
+			errorMessage="Name must be filled!";
+			return false;
+		}else if(username.isBlank()) {
+			errorMessage="Username must be filled!";
+			return false;
+		}else if(status.isBlank()) {
+			errorMessage="Status must be filled!";
+			return false;
+		}else if(!"Active".equals(status)&&!"Not Active".equals(status)) {
+			errorMessage="Status must be filled with Active or Not Active";
+			return false;
+		}
+//		else if(salary==0) {
+//			errorMessage="Salary must be filled!";
+//			return false;
+//		}
 	
 		try {
-			parsedentermonth=Integer.parseInt(entermonth);
+			parsedSalary=Integer.parseInt(salary);
+			if(parsedSalary<=0) {
+				return false;
+			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
-			errorMessage="ID must be integer!";
+			errorMessage="Salary must be integer!";
 			return false;
 		}
-	//	System.out.println(parsedentermonth);
 		MenuManager menumanager=new MenuManager();
-		menumanager.setEntermonth(parsedentermonth);
-		return true;
-	}
-	public static boolean insertMenu(String id,String quantity, String method) {
-		int parsedId;
-		int parsedQuantity;
-		try {
-			parsedId=Integer.parseInt(id);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-			errorMessage="ID must be integer!";
-			return false;
-		}
-		try {
-			parsedQuantity=Integer.parseInt(quantity);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-			errorMessage="Quantity must be integer!";
-			return false;
-		}
-		if(method.isBlank()) {
-			errorMessage="Method must be filled!";
-			return false;
-		}
-
-		
-		MenuManager menumanager=new MenuManager();
-		menumanager.setId(parsedId);
-		menumanager.setQuantity(parsedQuantity);
-		menumanager.setMethod(method);
-	//	menutransactionmanagement.setDate(date);
+		menumanager.setRole(role);
+		menumanager.setName(name);
+		menumanager.setUsername(username);
+		menumanager.setStatus(status);
+		menumanager.setSalary(parsedSalary);
+		menumanager.setPassword(username);
 		if(!menumanager.insert()) {
 			errorMessage="Insert failed!";
 			return false;
 		}	
 		return true;
 	}
-	public static boolean updateMenu(String id, String quantity, String method) {
+	public static boolean updateMenu(String id,String role, String name, String username, String status, String salary) {
 		int parsedId;
-		int parsedQuantity;
+		int parsedSalary;
+		String password=null;
 		try {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
@@ -73,31 +181,51 @@ public class MenuControllerManager {
 			errorMessage="ID must be integer!";
 			return false;
 		}
+		
+		if(role.isBlank()) {
+			errorMessage="Role must be filled!";
+			return false;
+		}else if(name.isBlank()) {
+			errorMessage="Name must be filled!";
+			return false;
+		}else if(username.isBlank()) {
+			errorMessage="Username must be filled!";
+			return false;
+		}else if(status.isBlank()) {
+			errorMessage="Status must be filled!";
+			return false;
+		}
+		else if(!"Active".equals(status)&&!"Not Active".equals(status)) {
+			errorMessage="Status must be filled with Active or Not Active";
+			return false;
+		}
+//		else if(salary==0) {
+//			errorMessage="Salary must be filled!";
+//			return false;
+//		}
 		try {
-			parsedQuantity=Integer.parseInt(quantity);
+			parsedSalary=Integer.parseInt(salary);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
-			errorMessage="Quantity must be integer!";
+			errorMessage="Salary must be integer!";
 			return false;
 		}
-		if(method.isBlank()) {
-			errorMessage="Method must be filled!";
-			return false;
-		}
-
 		MenuManager menumanager=new MenuManager();
-		menumanager.setId(parsedId);
-		menumanager.setQuantity(parsedQuantity);
-		menumanager.setMethod(method);
-//		menutransactionmanagement.setDate(date);
+		menumanager.setEmployeeid(parsedId);
+		menumanager.setRole(role);
+		menumanager.setName(username);
+		menumanager.setUsername(username);
+		menumanager.setStatus(status);
+		menumanager.setSalary(parsedSalary);
+		menumanager.setPassword(username);
 		if(!menumanager.update()) {
 			errorMessage="Update failed!";
 			return false;
 		}
 		return true;
 	}
-	public static boolean deleteMenu(String id) {
+	public static boolean deleteMenu(String id,String status) {
 		int parsedId;
 		try {
 			parsedId=Integer.parseInt(id);
@@ -107,16 +235,18 @@ public class MenuControllerManager {
 			errorMessage="ID must be integer!";
 			return false;
 		}
-		MenuManager menumanager=new MenuManager();
-		menumanager.setId(parsedId);
-		if(!menumanager.delete()) {
+		status.equals("Not Active");
+		Menu menu=new Menu();
+		menu.setId(parsedId);
+		menu.setStatus(status);
+		if(!menu.delete()) {
 			errorMessage="Delete failed!";
 			return false;
 		}
 		return true;
 	}
-	public static Manager showManager() {
-		return new Manager();
+	public static MenuManager showMenuManager() {
+		return new MenuManager();
 	}
 	public static HomePage showHomeFrame() {
 		return new HomePage();

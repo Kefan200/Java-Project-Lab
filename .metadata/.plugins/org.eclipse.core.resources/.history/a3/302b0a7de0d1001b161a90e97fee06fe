@@ -479,7 +479,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		}
 		table.setModel(dtm);
 	
-	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
