@@ -1,14 +1,14 @@
 import java.util.Vector;
 
-public class MenuControllerTransaction {
+public class MenuControllerCartItem {
 	
 	public static String errorMessage;
-	public MenuControllerTransaction() {
+	public MenuControllerCartItem() {
 		// TODO Auto-generated constructor stub
 	}
-	public static Vector<MenuTransaction>getAllMenus(){
-		MenuTransaction menutransaction=new MenuTransaction();
-		return menutransaction.getAll();
+	public static Vector<MenuCartItem>getAllMenus(){
+		MenuCartItem menucartitem=new MenuCartItem();
+		return menucartitem.getAll();
 	}
 	public static boolean insertMenu(String id,String quantity, String method) {
 		int parsedId;
@@ -35,12 +35,12 @@ public class MenuControllerTransaction {
 		}
 
 		
-		MenuTransaction menutransaction=new MenuTransaction();
-		menutransaction.setId(parsedId);
-		menutransaction.setQuantity(parsedQuantity);
-		menutransaction.setMethod(method);
+		MenuCartItem menucartitem=new MenuCartItem();
+		menucartitem.setId(parsedId);
+		menucartitem.setQuantity(parsedQuantity);
+		menucartitem.setMethod(method);
 	//	menutransactionmanagement.setDate(date);
-		if(!menutransaction.insert()) {
+		if(!menucartitem.insert()) {
 			errorMessage="Insert failed!";
 			return false;
 		}	
@@ -70,12 +70,12 @@ public class MenuControllerTransaction {
 			return false;
 		}
 
-		MenuTransaction menutransaction=new MenuTransaction();
-		menutransaction.setId(parsedId);
-		menutransaction.setQuantity(parsedQuantity);
-		menutransaction.setMethod(method);
-//		menutransactionmanagement.setDate(date);
-		if(!menutransaction.update()) {
+		MenuCartItem menucartitem=new MenuCartItem();
+		menucartitem.setId(parsedId);
+		menucartitem.setQuantity(parsedQuantity);
+		menucartitem.setMethod(method);
+
+		if(!menucartitem.update()) {
 			errorMessage="Update failed!";
 			return false;
 		}
@@ -91,16 +91,16 @@ public class MenuControllerTransaction {
 			errorMessage="ID must be integer!";
 			return false;
 		}
-		MenuTransaction menutransaction=new MenuTransaction();
-		menutransaction.setId(parsedId);
-		if(!menutransaction.delete()) {
+		MenuCartItem menucartitem=new MenuCartItem();
+		menucartitem.setId(parsedId);
+		if(!menucartitem.delete()) {
 			errorMessage="Delete failed!";
 			return false;
 		}
 		return true;
 	}
-	public static Transaction showTransaction() {
-		return new Transaction();
+	public static CartItem showCartItem() {
+		return new CartItem();
 	}
 	public static HomePage showHomeFrame() {
 		return new HomePage();

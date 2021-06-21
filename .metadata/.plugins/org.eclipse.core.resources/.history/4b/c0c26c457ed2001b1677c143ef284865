@@ -1,0 +1,8 @@
+
+public class MenuCartItem {
+
+	public MenuCartItem() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

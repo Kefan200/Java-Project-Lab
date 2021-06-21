@@ -17,14 +17,13 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 
 	JMenuBar menubar;
 	JMenu homeMenu, logoutMenu;
-	JMenuItem productMenu,employeeMenu,transactionMenu,managerMenu,cartitemMenu; 
+	JMenuItem productMenu,employeeMenu,transactionMenu,managerMenu; 
 	JSeparator separator1;
 	InsertInternalPage ii = null;
 	Product product = null;
 	Employee employee = null;
 	Transaction transaction = null;
 	Manager manager = null;
-	CartItem cartitem=null;
 	public HomePage() {
 		//Initialize Component
 		menubar = new JMenuBar();
@@ -45,15 +44,10 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 		managerMenu=new JMenuItem("Manager");
 		managerMenu.addActionListener(this);
 		
-
-		cartitemMenu=new JMenuItem("Cart Item");
-		cartitemMenu.addActionListener(this);
-		
 		homeMenu.add(productMenu);
 		homeMenu.add(employeeMenu);
 		homeMenu.add(transactionMenu);
 		homeMenu.add(managerMenu);
-		homeMenu.add(cartitemMenu);
 		menubar.add(homeMenu);
 		menubar.add(logoutMenu);
 		
@@ -133,14 +127,7 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 			}
 			add(manager = MenuControllerManager.showManager());
 		}
-		if(e.getSource()==cartitemMenu) {
-			System.out.println("Cart Item\n");
-
-			if(cartitem != null) {
-				cartitem.dispose();
-			}
-			add(cartitem = MenuControllerCartItem.showCartItem());
-		}
+		
 	}
 
 }

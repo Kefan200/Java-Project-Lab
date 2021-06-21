@@ -7,8 +7,8 @@ public class MenuControllerTransaction {
 		// TODO Auto-generated constructor stub
 	}
 	public static Vector<MenuTransaction>getAllMenus(){
-		MenuTransaction menutransaction=new MenuTransaction();
-		return menutransaction.getAll();
+		MenuTransaction menutransactionmanagement=new MenuTransaction();
+		return menutransactionmanagement.getAll();
 	}
 	public static boolean insertMenu(String id,String quantity, String method) {
 		int parsedId;
@@ -35,12 +35,12 @@ public class MenuControllerTransaction {
 		}
 
 		
-		MenuTransaction menutransaction=new MenuTransaction();
-		menutransaction.setId(parsedId);
-		menutransaction.setQuantity(parsedQuantity);
-		menutransaction.setMethod(method);
+		MenuTransaction menutransactionmanagement=new MenuTransaction();
+		menutransactionmanagement.setId(parsedId);
+		menutransactionmanagement.setQuantity(parsedQuantity);
+		menutransactionmanagement.setMethod(method);
 	//	menutransactionmanagement.setDate(date);
-		if(!menutransaction.insert()) {
+		if(!menutransactionmanagement.insert()) {
 			errorMessage="Insert failed!";
 			return false;
 		}	
@@ -70,12 +70,12 @@ public class MenuControllerTransaction {
 			return false;
 		}
 
-		MenuTransaction menutransaction=new MenuTransaction();
-		menutransaction.setId(parsedId);
-		menutransaction.setQuantity(parsedQuantity);
-		menutransaction.setMethod(method);
+		MenuTransaction menutransactionmanagement=new MenuTransaction();
+		menutransactionmanagement.setId(parsedId);
+		menutransactionmanagement.setQuantity(parsedQuantity);
+		menutransactionmanagement.setMethod(method);
 //		menutransactionmanagement.setDate(date);
-		if(!menutransaction.update()) {
+		if(!menutransactionmanagement.update()) {
 			errorMessage="Update failed!";
 			return false;
 		}
@@ -91,9 +91,9 @@ public class MenuControllerTransaction {
 			errorMessage="ID must be integer!";
 			return false;
 		}
-		MenuTransaction menutransaction=new MenuTransaction();
-		menutransaction.setId(parsedId);
-		if(!menutransaction.delete()) {
+		MenuTransaction menutransactionmanagement=new MenuTransaction();
+		menutransactionmanagement.setId(parsedId);
+		if(!menutransactionmanagement.delete()) {
 			errorMessage="Delete failed!";
 			return false;
 		}

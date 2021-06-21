@@ -46,7 +46,7 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 		managerMenu.addActionListener(this);
 		
 
-		cartitemMenu=new JMenuItem("Cart Item");
+		cartitemMenu=new JMenuItem("Manager");
 		cartitemMenu.addActionListener(this);
 		
 		homeMenu.add(productMenu);
