@@ -1,0 +1,142 @@
+import java.util.Vector;
+
+public class MenuControllerEmployee {
+
+	public static String errorMessage;
+	public MenuControllerEmployee() {
+		// TODO Auto-generated constructor stub
+	}
+	public static Vector<MenuEmployee> getAllMenus(){
+		MenuEmployee menu=new MenuEmployee();
+		return menu.getAll();
+	}
+	public static boolean insertMenu(String role, String name, String username, String status, String salary) {
+		int parsedSalary;
+		if(role.isBlank()) {
+			errorMessage="Role must be filled!";
+			return false;
+		}else if(name.isBlank()) {
+			errorMessage="Name must be filled!";
+			return false;
+		}else if(username.isBlank()) {
+			errorMessage="Username must be filled!";
+			return false;
+		}else if(status.isBlank()) {
+			errorMessage="Status must be filled!";
+			return false;
+		}else if(!"Active".equals(status)&&!"Not Active".equals(status)) {
+			errorMessage="Status must be filled with Active or Not Active";
+			return false;
+		}
+//		else if(salary==0) {
+//			errorMessage="Salary must be filled!";
+//			return false;
+//		}
+	
+		try {
+			parsedSalary=Integer.parseInt(salary);
+			if(parsedSalary<=0) {
+				return false;
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			errorMessage="Salary must be integer!";
+			return false;
+		}
+		MenuEmployee menu=new MenuEmployee();
+		menu.setRole(role);
+		menu.setName(name);
+		menu.setUsername(username);
+		menu.setStatus(status);
+		menu.setSalary(parsedSalary);
+		menu.setPassword(username);
+		if(!menu.insert()) {
+			errorMessage="Insert failed!";
+			return false;
+		}	
+		return true;
+	}
+	public static boolean updateMenu(String id,String role, String name, String username, String status, String salary) {
+		int parsedId;
+		int parsedSalary;
+		String password=null;
+		try {
+			parsedId=Integer.parseInt(id);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			errorMessage="ID must be integer!";
+			return false;
+		}
+		
+		if(role.isBlank()) {
+			errorMessage="Role must be filled!";
+			return false;
+		}else if(name.isBlank()) {
+			errorMessage="Name must be filled!";
+			return false;
+		}else if(username.isBlank()) {
+			errorMessage="Username must be filled!";
+			return false;
+		}else if(status.isBlank()) {
+			errorMessage="Status must be filled!";
+			return false;
+		}
+		else if(!"Active".equals(status)&&!"Not Active".equals(status)) {
+			errorMessage="Status must be filled with Active or Not Active";
+			return false;
+		}
+//		else if(salary==0) {
+//			errorMessage="Salary must be filled!";
+//			return false;
+//		}
+		try {
+			parsedSalary=Integer.parseInt(salary);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			errorMessage="Salary must be integer!";
+			return false;
+		}
+		MenuEmployee menu=new MenuEmployee();
+		menu.setId(parsedId);
+		menu.setRole(role);
+		menu.setName(username);
+		menu.setUsername(username);
+		menu.setStatus(status);
+		menu.setSalary(parsedSalary);
+		menu.setPassword(username);
+		if(!menu.update()) {
+			errorMessage="Update failed!";
+			return false;
+		}
+		return true;
+	}
+	public static boolean deleteMenu(String id,String status) {
+		int parsedId;
+		try {
+			parsedId=Integer.parseInt(id);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			errorMessage="ID must be integer!";
+			return false;
+		}
+		status.equals("Not Active");
+		MenuEmployee menu=new MenuEmployee();
+		menu.setId(parsedId);
+		menu.setStatus(status);
+		if(!menu.delete()) {
+			errorMessage="Delete failed!";
+			return false;
+		}
+		return true;
+	}
+	public static Employee showEmployee() {
+		return new Employee();
+	}
+	public static HomePage showHomeFrame() {
+		return new HomePage();
+	}
+}

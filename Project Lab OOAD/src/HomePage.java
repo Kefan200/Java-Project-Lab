@@ -17,12 +17,12 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 
 	JMenuBar menubar;
 	JMenu homeMenu, logoutMenu;
-	JMenuItem productManagementMenu,humanResourceManagementMenu,transactionManagementMenu,managerMenu; 
+	JMenuItem productMenu,employeeMenu,transactionMenu,managerMenu; 
 	JSeparator separator1;
 	InsertInternalPage ii = null;
-	ProductManagement productManagement = null;
-	HumanResourceManagement humanResourceManagement = null;
-	TransactionManagement transactionManagement = null;
+	Product product = null;
+	Employee employee = null;
+	Transaction transaction = null;
 	Manager manager = null;
 	public HomePage() {
 		//Initialize Component
@@ -32,21 +32,21 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 		//Add Menu Listener (pakai yg di implements ke class)
 		logoutMenu.addMenuListener(this);
 		
-		productManagementMenu=new JMenuItem("Product Management");
-		productManagementMenu.addActionListener(this);
+		productMenu=new JMenuItem("Product Management");
+		productMenu.addActionListener(this);
 		
-		humanResourceManagementMenu=new JMenuItem("Human Resource Management");
-		humanResourceManagementMenu.addActionListener(this);
+		employeeMenu=new JMenuItem("Human Resource Management");
+		employeeMenu.addActionListener(this);
 		
-		transactionManagementMenu=new JMenuItem("Transaction Management");
-		transactionManagementMenu.addActionListener(this);
+		transactionMenu=new JMenuItem("Transaction Management");
+		transactionMenu.addActionListener(this);
 		
 		managerMenu=new JMenuItem("Manager");
 		managerMenu.addActionListener(this);
 		
-		homeMenu.add(productManagementMenu);
-		homeMenu.add(humanResourceManagementMenu);
-		homeMenu.add(transactionManagementMenu);
+		homeMenu.add(productMenu);
+		homeMenu.add(employeeMenu);
+		homeMenu.add(transactionMenu);
 		homeMenu.add(managerMenu);
 		menubar.add(homeMenu);
 		menubar.add(logoutMenu);
@@ -64,18 +64,18 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 
 	@Override
 	public void menuSelected(MenuEvent e) {
-		if(e.getSource() == logoutMenu) {
-			System.out.println("Logout menu is selected");
-			
-			//JOptionPane.showMessageDialog(null, "Logout!");
-			int result = JOptionPane.showConfirmDialog(null, "Are you sure to logout?");
-			System.out.println(result);
-			
-			if(result == 0) {
-				this.dispose();
-				RegisterPage rf = new RegisterPage();
-			}
-		}
+//		if(e.getSource() == logoutMenu) {
+//			System.out.println("Logout menu is selected");
+//			
+//			//JOptionPane.showMessageDialog(null, "Logout!");
+//			int result = JOptionPane.showConfirmDialog(null, "Are you sure to logout?");
+//			System.out.println(result);
+//			
+//			if(result == 0) {
+//				this.dispose();
+//				RegisterPage rf = new RegisterPage();
+//			}
+//		}
 	}
 
 	@Override
@@ -94,32 +94,30 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		
-		if(e.getSource()==productManagementMenu) {
+		if(e.getSource()==productMenu) {
 			System.out.println("Product Management\n");
-//			if(ii != null) {
-//				ii.dispose();
-//			}
-			if(productManagement != null) {
-				productManagement.dispose();
+
+			if(product != null) {
+				product.dispose();
 			}
-			add(productManagement = MenuControllerProductManagement.showProductManagement());
+			add(product = MenuControllerProduct.showProduct());
 		}
-		if(e.getSource()==humanResourceManagementMenu) {
+		if(e.getSource()==employeeMenu) {
 			System.out.println("Human Resource Management\n");
 
-			if(humanResourceManagement != null) {
-				humanResourceManagement.dispose();
+			if(employee!= null) {
+				employee.dispose();
 			}
-//			add(humanResourceManagement = new HumanResourceManagement());
-			add(humanResourceManagement=MenuController.showHumanResourceManagement()); 
+
+			add(employee=MenuControllerEmployee.showEmployee()); 
 		}
-		if(e.getSource()==transactionManagementMenu) {
+		if(e.getSource()==transactionMenu) {
 			System.out.println("Transaction Management\n");
 
-			if(transactionManagement != null) {
-				transactionManagement.dispose();
+			if(transaction != null) {
+				transaction.dispose();
 			}
-			add(transactionManagement = MenuControllerTransactionManagement.showTransactionManagement());
+			add(transaction= MenuControllerTransaction.showTransaction());
 		}
 		if(e.getSource()==managerMenu) {
 			System.out.println("Manager\n");

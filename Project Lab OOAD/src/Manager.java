@@ -464,9 +464,9 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		
 		dtm=new DefaultTableModel(column,0);
 		
-		Vector<Menu> menus=MenuController.getAllMenus();
+		Vector<MenuEmployee> menus=MenuControllerEmployee.getAllMenus();
 		
-		for(Menu menu: menus) {
+		for(MenuEmployee menu: menus) {
 			rowData=new Vector<>();
 			rowData.add(menu.getId());
 			rowData.add(menu.getRole());

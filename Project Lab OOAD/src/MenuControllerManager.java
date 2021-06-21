@@ -236,7 +236,7 @@ public class MenuControllerManager {
 			return false;
 		}
 		status.equals("Not Active");
-		Menu menu=new Menu();
+		MenuEmployee menu=new MenuEmployee();
 		menu.setId(parsedId);
 		menu.setStatus(status);
 		if(!menu.delete()) {
@@ -245,8 +245,8 @@ public class MenuControllerManager {
 		}
 		return true;
 	}
-	public static MenuManager showMenuManager() {
-		return new MenuManager();
+	public static Manager showManager() {
+		return new Manager();
 	}
 	public static HomePage showHomeFrame() {
 		return new HomePage();

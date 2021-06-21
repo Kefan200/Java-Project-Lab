@@ -1,0 +1,135 @@
+
+
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
+
+public class HomePage extends JFrame implements MenuListener, ActionListener{
+
+	JMenuBar menubar;
+	JMenu homeMenu, logoutMenu;
+	JMenuItem productManagementMenu,employeeMenu,transactionMenu,managerMenu; 
+	JSeparator separator1;
+	InsertInternalPage ii = null;
+	ProductManagement productManagement = null;
+	Employee employee = null;
+	Transaction transaction = null;
+	Manager manager = null;
+	public HomePage() {
+		//Initialize Component
+		menubar = new JMenuBar();
+		homeMenu = new JMenu("Home");
+		logoutMenu = new JMenu("Logout");
+		//Add Menu Listener (pakai yg di implements ke class)
+		logoutMenu.addMenuListener(this);
+		
+		productManagementMenu=new JMenuItem("Product Management");
+		productManagementMenu.addActionListener(this);
+		
+		employeeMenu=new JMenuItem("Human Resource Management");
+		employeeMenu.addActionListener(this);
+		
+		transactionMenu=new JMenuItem("Transaction Management");
+		transactionMenu.addActionListener(this);
+		
+		managerMenu=new JMenuItem("Manager");
+		managerMenu.addActionListener(this);
+		
+		homeMenu.add(productManagementMenu);
+		homeMenu.add(employeeMenu);
+		homeMenu.add(transactionMenu);
+		homeMenu.add(managerMenu);
+		menubar.add(homeMenu);
+		menubar.add(logoutMenu);
+		
+		
+		setJMenuBar(menubar);
+		
+		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setTitle("Home");
+		this.setSize(new Dimension(700, 730));
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+
+	@Override
+	public void menuSelected(MenuEvent e) {
+//		if(e.getSource() == logoutMenu) {
+//			System.out.println("Logout menu is selected");
+//			
+//			//JOptionPane.showMessageDialog(null, "Logout!");
+//			int result = JOptionPane.showConfirmDialog(null, "Are you sure to logout?");
+//			System.out.println(result);
+//			
+//			if(result == 0) {
+//				this.dispose();
+//				RegisterPage rf = new RegisterPage();
+//			}
+//		}
+	}
+
+	@Override
+	public void menuDeselected(MenuEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void menuCanceled(MenuEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		
+		if(e.getSource()==productManagementMenu) {
+			System.out.println("Product Management\n");
+//			if(ii != null) {
+//				ii.dispose();
+//			}
+			if(productManagement != null) {
+				productManagement.dispose();
+			}
+			add(productManagement = MenuControllerProduct.showProductManagement());
+		}
+		if(e.getSource()==employeeMenu) {
+			System.out.println("Human Resource Management\n");
+
+			if(employee!= null) {
+				employee.dispose();
+			}
+//			add(humanResourceManagement = new HumanResourceManagement());
+			add(employee=MenuControllerEmployee.showEmployee()); 
+		}
+		if(e.getSource()==transactionMenu) {
+			System.out.println("Transaction Management\n");
+
+			if(transaction != null) {
+				transaction.dispose();
+			}
+			add(transaction= MenuControllerTransaction.showTransaction());
+		}
+		if(e.getSource()==managerMenu) {
+			System.out.println("Manager\n");
+
+			if(manager != null) {
+				manager.dispose();
+			}
+			add(manager = MenuControllerManager.showManager());
+		}
+		
+	}
+
+}
