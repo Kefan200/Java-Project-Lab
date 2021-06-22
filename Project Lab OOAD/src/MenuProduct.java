@@ -89,15 +89,6 @@ public class MenuProduct {
 				}
                 return false;
 	}
-//            }
-//    //        return true;
-//        } catch (SQLException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        return false;
-//		try {
-
 
 
 	public boolean update() {

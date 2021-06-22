@@ -20,10 +20,6 @@ public class MenuControllerProduct {
 			errorMessage="Description must be filled!";
 			return false;
 		}
-//		else if(salary==0) {
-//			errorMessage="Salary must be filled!";
-//			return false;
-//		}
 		try {
 			parsedPrice=Integer.parseInt(price);
 			if(parsedPrice<=0) {
@@ -32,7 +28,6 @@ public class MenuControllerProduct {
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Price must be integer!";
 			return false;
 		}
@@ -44,7 +39,6 @@ public class MenuControllerProduct {
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Stock must be integer!";
 			return false;
 		}
@@ -70,10 +64,6 @@ public class MenuControllerProduct {
 			errorMessage="Description must be filled!";
 			return false;
 		}
-//		else if(salary==0) {
-//			errorMessage="Salary must be filled!";
-//			return false;
-//		}
 		try {
 			parsedPrice=Integer.parseInt(price);
 			if(parsedPrice<=0) {
@@ -82,7 +72,6 @@ public class MenuControllerProduct {
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Price must be integer!";
 			return false;
 		}
@@ -91,7 +80,6 @@ public class MenuControllerProduct {
 			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Id must be integer!";
 			return false;
 		}
@@ -103,7 +91,6 @@ public class MenuControllerProduct {
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Stock must be integer!";
 			return false;
 		}
@@ -126,7 +113,6 @@ public class MenuControllerProduct {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}

@@ -134,7 +134,6 @@ public class MenuEmployee {
 			ps.setInt(5, salary);
 			ps.setString(6, password);
 			return ps.executeUpdate()==1;
-	//		return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -17,7 +17,7 @@ public class MenuControllerTransaction {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
+
 			errorMessage="ID must be integer!";
 			return false;
 		}
@@ -25,7 +25,6 @@ public class MenuControllerTransaction {
 			parsedQuantity=Integer.parseInt(quantity);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Quantity must be integer!";
 			return false;
 		}
@@ -39,7 +38,6 @@ public class MenuControllerTransaction {
 		menutransaction.setId(parsedId);
 		menutransaction.setQuantity(parsedQuantity);
 		menutransaction.setMethod(method);
-	//	menutransactionmanagement.setDate(date);
 		if(!menutransaction.insert()) {
 			errorMessage="Insert failed!";
 			return false;
@@ -53,7 +51,6 @@ public class MenuControllerTransaction {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}
@@ -61,7 +58,6 @@ public class MenuControllerTransaction {
 			parsedQuantity=Integer.parseInt(quantity);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Quantity must be integer!";
 			return false;
 		}
@@ -74,7 +70,6 @@ public class MenuControllerTransaction {
 		menutransaction.setId(parsedId);
 		menutransaction.setQuantity(parsedQuantity);
 		menutransaction.setMethod(method);
-//		menutransactionmanagement.setDate(date);
 		if(!menutransaction.update()) {
 			errorMessage="Update failed!";
 			return false;
@@ -87,7 +82,6 @@ public class MenuControllerTransaction {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}
