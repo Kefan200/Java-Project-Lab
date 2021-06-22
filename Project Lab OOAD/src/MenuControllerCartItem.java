@@ -17,7 +17,6 @@ public class MenuControllerCartItem {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}
@@ -25,7 +24,6 @@ public class MenuControllerCartItem {
 			parsedQuantity=Integer.parseInt(quantity);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Quantity must be integer!";
 			return false;
 		}
@@ -39,7 +37,6 @@ public class MenuControllerCartItem {
 		menucartitem.setId(parsedId);
 		menucartitem.setQuantity(parsedQuantity);
 		menucartitem.setMethod(method);
-	//	menutransactionmanagement.setDate(date);
 		if(!menucartitem.insert()) {
 			errorMessage="Insert failed!";
 			return false;
@@ -53,7 +50,6 @@ public class MenuControllerCartItem {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}
@@ -61,7 +57,6 @@ public class MenuControllerCartItem {
 			parsedQuantity=Integer.parseInt(quantity);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Quantity must be integer!";
 			return false;
 		}
@@ -87,7 +82,6 @@ public class MenuControllerCartItem {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}

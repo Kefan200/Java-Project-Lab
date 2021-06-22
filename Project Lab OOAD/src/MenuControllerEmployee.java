@@ -28,10 +28,6 @@ public class MenuControllerEmployee {
 			errorMessage="Status must be filled with Active or Not Active";
 			return false;
 		}
-//		else if(salary==0) {
-//			errorMessage="Salary must be filled!";
-//			return false;
-//		}
 	
 		try {
 			parsedSalary=Integer.parseInt(salary);
@@ -40,7 +36,6 @@ public class MenuControllerEmployee {
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Salary must be integer!";
 			return false;
 		}
@@ -65,7 +60,6 @@ public class MenuControllerEmployee {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}
@@ -87,15 +81,10 @@ public class MenuControllerEmployee {
 			errorMessage="Status must be filled with Active or Not Active";
 			return false;
 		}
-//		else if(salary==0) {
-//			errorMessage="Salary must be filled!";
-//			return false;
-//		}
 		try {
 			parsedSalary=Integer.parseInt(salary);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Salary must be integer!";
 			return false;
 		}
@@ -119,7 +108,6 @@ public class MenuControllerEmployee {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}

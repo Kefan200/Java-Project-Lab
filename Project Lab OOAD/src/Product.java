@@ -34,12 +34,7 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 	
 	Vector<Object>rowData;
 	
-//	Connect con;
-	
 	public Product() {
-		
-//		con=new Connect();
-		//Initialize component
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		centerPanel= new JPanel(new GridLayout(5,2));
@@ -60,7 +55,6 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 		updateButton=new JButton("Update");
 		deleteButton=new JButton("Delete");
 		
-		//ActionListener biar tombolnya bisa dipencet
 		insertButton.addActionListener(this);
 		updateButton.addActionListener(this);
 		deleteButton.addActionListener(this);
@@ -99,17 +93,9 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 		});
 		
 		scrollpane = new JScrollPane(table);
-		
-//		dtm.addRow(newData);
-//		dtm.insertRow(0, newData2);
-		
+			
 		northPanel.add(scrollpane);
-		
-//		southPanel.add(id);
-//		southPanel.add(name);
-//		southPanel.add(type);
-//		southPanel.add(cuisine);
-		
+	
 		this.setLayout(new BorderLayout());
 		
 		this.add(northPanel, BorderLayout.NORTH);
@@ -125,8 +111,7 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 		Object[] column = {"ID", "Name", "Description", "Price","Stock"};
 		
 		dtm=new DefaultTableModel(column,0);
-		
-//		con.rs=con.execQuery("SELECT * FROM product");
+
 		Vector<MenuProduct>menus=MenuControllerProduct.getAllMenus();
 		
 		for(MenuProduct menuproductmanagement: menus) {
@@ -139,32 +124,6 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 			dtm.addRow(rowData);
 		}
 		table.setModel(dtm);
-//		try {
-//			//majuin cursor satu baris dari baris sebelumnya
-//			while(con.rs.next()) {
-//				rowData =new Vector<>(); 
-//				
-//				//Cara Pertama
-////				for (int i = 1; i <= con.rsm.getColumnCount(); i++) {
-////					rowData.add(con.rs.getObject(i));
-////				}
-//				
-//				//Cara Kedua
-//				int id=rs.getInt("productid");
-//				String name=rs.getString("productname");
-//				String description=con.rs.getString("productdescription");
-//				int price=con.rs.getInt("productprice");
-//				int stock=con.rs.getInt("productstock");
-//				
-//				
-//			}
-//			//tambahin dalam jtable
-//		
-//			
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 	}
 
 	@Override
@@ -201,13 +160,11 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==insertButton) {
-//			int id=Integer.parseInt(idField.getText());
 			String name=nameField.getText();
 			String description=descriptionField.getText();
 			String price=priceField.getText();
 			String stock=stockField.getText();
 			boolean isInserted=MenuControllerProduct.insertMenu(name,description,price,stock);
-//			String query =String.format("INSERT INTO product VALUES(null,'%s','%s',%d,%d)",name,description,price,stock);
 			if(isInserted) {
 				refreshTable();
 				
@@ -220,7 +177,6 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 				String errorMessage=MenuControllerProduct.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
-//			con.execUpdate(query);
 		
 		}else if(e.getSource()==updateButton){
 			String id=idField.getText();
@@ -229,7 +185,6 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 			String price=priceField.getText();
 			String stock=stockField.getText();
 			boolean isUpdated=MenuControllerProduct.updateMenu(name,description,price,id,stock);
-//			String query =String.format("INSERT INTO product VALUES(null,'%s','%s',%d,%d)",name,description,price,stock);
 			if(isUpdated) {
 				refreshTable();
 				
@@ -242,22 +197,8 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 				String errorMessage=MenuControllerProduct.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
-//			int id=Integer.parseInt(idField.getText());
-//			String name=nameField.getText();
-//			String description=descriptionField.getText();
-//			int price=Integer.parseInt(priceField.getText());
-//			int stock=Integer.parseInt(stockField.getText());
-//			
-//		      
-//			String query = String.format("update product set productname= '%s', productdescription='%s', productprice=%d,productstock=%d, where productid=%d",name,description,price,stock,id);
-////			PreparedStatement preparedStmt = con.prepareStatement(query);
-////		    preparedStmt.setInt   (1, 6000);
-////		    preparedStmt.setString(2, "Fred");
-//		      
-//		     con.execUpdate(query);
-//		     refreshTable();
+
 		}else if(e.getSource()==deleteButton) {
-//			int id=Integer.parseInt(employeeidField.getText());
 			String id=idField.getText();
 			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
 			if(confirmDelete!=JOptionPane.YES_OPTION) {

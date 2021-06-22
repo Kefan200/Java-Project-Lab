@@ -28,19 +28,13 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 	DefaultTableModel dtm;
 	JScrollPane scrollpane;
 	JLabel employeeid, employeerole, employeename, employeeusername,employeestatus,employeesalary;
-	//buat isi text
 	JTextField employeeidField, employeeroleField,employeenameField,employeeusernameField,employeesalaryField,employeestatusField;
 	JButton insertButton, updateButton, deleteButton;
 	Vector<Object>rowData;
 	String status[]= {"Active", "Not Active"};
-//	JComboBox employeestatusbox=new JComboBox(status);
 
-//	Connect con;
-	
 	public Employee() {
 		
-	//	con=new Connect();
-		//Initialize component
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		centerPanel= new JPanel(new GridLayout(6,2));
@@ -57,7 +51,6 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 		employeeroleField=new JTextField();
 		employeenameField=new JTextField();
 		employeeusernameField=new JTextField();
-//		employeestatusbox.setBounds(50, 50,90,20);
 		employeestatusField=new JTextField();
 		employeesalaryField=new JTextField();
 		
@@ -65,7 +58,6 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 		updateButton=new JButton("Update");
 		deleteButton=new JButton("Delete");
 		
-		//ActionListener biar tombolnya bisa dipencet
 		insertButton.addActionListener(this);
 		updateButton.addActionListener(this);
 		deleteButton.addActionListener(this);
@@ -110,16 +102,9 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 		
 		scrollpane = new JScrollPane(table);
 		
-//		dtm.addRow(newData);
-//		dtm.insertRow(0, newData2);
-		
+
 		northPanel.add(scrollpane);
-		
-//		southPanel.add(id);
-//		southPanel.add(name);
-//		southPanel.add(type);
-//		southPanel.add(cuisine);
-		
+	
 		this.setLayout(new BorderLayout());
 		
 		this.add(northPanel, BorderLayout.NORTH);
@@ -150,44 +135,6 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 			dtm.addRow(rowData);
 		}
 		table.setModel(dtm);
-	//	con.rs=con.execQuery("SELECT * FROM employee");
-		
-		
-//		try {
-//			PreparedStatement ps=Connect.getInstance().prepareStatement("SELECT * FROM employee");
-//			ResultSet rs=ps.executeQuery();
-//			//majuin cursor satu baris dari baris sebelumnya
-//			while(rs.next()) {
-//				rowData =new Vector<>(); 
-//				
-//				//Cara Pertama
-////				for (int i = 1; i <= con.rsx`m.getColumnCount(); i++) {
-////					rowData.add(con.rs.getObject(i));
-////				}
-//				
-//				//Cara Kedua
-//				int id=rs.getInt("employeeid");
-//				String role=rs.getString("employeerole");
-//				String name=rs.getString("employeename");
-//				String username=rs.getString("employeeusername");
-//				String status=rs.getString("employeestatus");
-//				int salary=rs.getInt("employeesalary");
-//				
-//				rowData.add(id);
-//				rowData.add(role);
-//				rowData.add(name);
-//				rowData.add(username);
-//				rowData.add(status);
-//				rowData.add(salary);
-//				dtm.addRow(rowData);
-//			}
-//			//tambahin dalam jtable
-//			table.setModel(dtm);
-//			
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
 	}
 
 	@Override
@@ -228,7 +175,6 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 			String name=employeenameField.getText();
 			String username=employeeusernameField.getText();
 			String status=employeestatusField.getText();
-//			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
 			String salary=employeesalaryField.getText();
 			boolean isInserted=MenuControllerEmployee.insertMenu(role, name, username, status, salary);
 			if(isInserted) {
@@ -244,30 +190,13 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 				String errorMessage=MenuControllerEmployee.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
-//			
-//		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
-//			try {
-//				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee "+"(role, name, username,status,salary) VALUES (?,?,?,?,?)");
-//				ps.setString(1, role);
-//				ps.setString(2, name);
-//				ps.setString(3, username);
-//				ps.setString(4, status);
-//				ps.setInt(5, salary);
-//				ps.executeUpdate();
 
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-////			con.execUpdate(query);
 
 		}else if(e.getSource()==updateButton){
-//			int id=Integer.parseInt(employeeidField.getText());
 			String id=employeeidField.getText();
 			String role=employeeroleField.getText();
 			String name=employeenameField.getText();
 			String username=employeeusernameField.getText();
-//			String status=(String) employeestatusbox.getItemAt(employeestatusbox.getSelectedIndex());
 			String status=employeestatusField.getText();
 			String salary=employeesalaryField.getText();
 			
@@ -284,26 +213,8 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 				String errorMessage=MenuControllerEmployee.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
-		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
-//			try {
-//				PreparedStatement ps=Connect.getInstance().prepareStatement("UPDATE employee"+"SET role=?,name=?,username=?,status=?,salary=? WHERE id=?");
-//				ps.setString(1, role);
-//				ps.setString(2, name);
-//				ps.setString(3, username);
-//				ps.setString(4, status);
-//				ps.setInt(5, salary);
-//				ps.setInt(6, id);
-//				ps.executeUpdate();
-//				
-
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-////			con.execUpdate(query);
 
 		}else if(e.getSource()==deleteButton) {
-//			int id=Integer.parseInt(employeeidField.getText());
 			String id=employeeidField.getText();
 			String status=employeestatusField.getText();
 			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
@@ -322,14 +233,6 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 				String errorMessage=MenuControllerEmployee.errorMessage;
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
-//			try {
-//				
-//				
-
-//			} catch (Exception e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
 		}
 	}
 

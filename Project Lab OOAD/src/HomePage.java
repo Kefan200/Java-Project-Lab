@@ -26,11 +26,10 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 	Manager manager = null;
 	CartItem cartitem=null;
 	public HomePage() {
-		//Initialize Component
+
 		menubar = new JMenuBar();
 		homeMenu = new JMenu("Home");
 		logoutMenu = new JMenu("Logout");
-		//Add Menu Listener (pakai yg di implements ke class)
 		logoutMenu.addMenuListener(this);
 		
 		productMenu=new JMenuItem("Product Management");
@@ -70,18 +69,7 @@ public class HomePage extends JFrame implements MenuListener, ActionListener{
 
 	@Override
 	public void menuSelected(MenuEvent e) {
-//		if(e.getSource() == logoutMenu) {
-//			System.out.println("Logout menu is selected");
-//			
-//			//JOptionPane.showMessageDialog(null, "Logout!");
-//			int result = JOptionPane.showConfirmDialog(null, "Are you sure to logout?");
-//			System.out.println(result);
-//			
-//			if(result == 0) {
-//				this.dispose();
-//				RegisterPage rf = new RegisterPage();
-//			}
-//		}
+
 	}
 
 	@Override

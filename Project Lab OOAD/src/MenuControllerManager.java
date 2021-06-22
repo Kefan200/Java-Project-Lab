@@ -10,22 +10,7 @@ public class MenuControllerManager {
 		MenuManager menumanager=new MenuManager();
 		return menumanager.getAll();
 	}
-//	public static boolean entermonthMenu(String entermonth) {
-//		int parsedentermonth;
-//	
-//		try {
-//			parsedentermonth=Integer.parseInt(entermonth);
-//		} catch (NumberFormatException e) {
-//			// TODO Auto-generated catch block
-////			e.printStackTrace();
-//			errorMessage="ID must be integer!";
-//			return false;
-//		}
-//	//	System.out.println(parsedentermonth);
-//		MenuManager menumanager=new MenuManager();
-//		menumanager.setEntermonth(parsedentermonth);
-//		return true;
-//	}
+
 
 	public static boolean insertMenu(String role, String name, String username, String status, String salary) {
 		int parsedSalary;
@@ -45,10 +30,7 @@ public class MenuControllerManager {
 			errorMessage="Status must be filled with Active or Not Active";
 			return false;
 		}
-//		else if(salary==0) {
-//			errorMessage="Salary must be filled!";
-//			return false;
-//		}
+
 	
 		try {
 			parsedSalary=Integer.parseInt(salary);
@@ -57,7 +39,6 @@ public class MenuControllerManager {
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Salary must be integer!";
 			return false;
 		}
@@ -82,7 +63,6 @@ public class MenuControllerManager {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}
@@ -104,15 +84,10 @@ public class MenuControllerManager {
 			errorMessage="Status must be filled with Active or Not Active";
 			return false;
 		}
-//		else if(salary==0) {
-//			errorMessage="Salary must be filled!";
-//			return false;
-//		}
 		try {
 			parsedSalary=Integer.parseInt(salary);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="Salary must be integer!";
 			return false;
 		}
@@ -136,7 +111,6 @@ public class MenuControllerManager {
 			parsedId=Integer.parseInt(id);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			errorMessage="ID must be integer!";
 			return false;
 		}

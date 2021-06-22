@@ -33,7 +33,7 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 	DefaultTableModel dtm;
 	JScrollPane scrollpane;
 	JLabel productid, productquantity, productmethod;
-	//buat isi text
+
 	JTextField productidField, productquantityField;
 	JButton insertButton, updateButton, deleteButton;
 	Vector<Object>rowData;
@@ -42,9 +42,6 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 	Connect con;
 	Date transactiondate=new Date();
 	public Transaction() {
-		
-//		con=new Connect();
-		//Initialize component
 		northPanel = new JPanel();
 		southPanel = new JPanel();
 		centerPanel= new JPanel(new GridLayout(3,2));
@@ -62,7 +59,6 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 		updateButton=new JButton("Update");
 		deleteButton=new JButton("Delete");
 		
-		//ActionListener biar tombolnya bisa dipencet
 		insertButton.addActionListener(this);
 		updateButton.addActionListener(this);
 		deleteButton.addActionListener(this);
@@ -93,16 +89,8 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 		});
 		
 		scrollpane = new JScrollPane(table);
-		
-//		dtm.addRow(newData);
-//		dtm.insertRow(0, newData2);
-		
+	
 		northPanel.add(scrollpane);
-		
-//		southPanel.add(id);
-//		southPanel.add(name);
-//		southPanel.add(type);
-//		southPanel.add(cuisine);
 		
 		this.setLayout(new BorderLayout());
 		
@@ -130,7 +118,7 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 			rowData.add(menutransaction.getDate());
 			dtm.addRow(rowData);
 		}
-		//tambahin dalam jtable
+
 		table.setModel(dtm);
 	}
 
@@ -171,8 +159,6 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 			String id=productidField.getText();
 			String quantity=productquantityField.getText();
 			String method=(String) productmethodbox.getItemAt(productmethodbox.getSelectedIndex());
-//			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-//			String strDate = dateFormat.format(transactiondate);
 
 			boolean isInserted=MenuControllerTransaction.insertMenu(id,quantity,method);
 			if(isInserted) {
@@ -185,8 +171,6 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
 
-			
-	//		employeestatusField.setText("");
 		}else if(e.getSource()==updateButton){
 			String id=productidField.getText();
 			String quantity=productquantityField.getText();
@@ -203,7 +187,6 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
 
-//			}
 		}else if(e.getSource()==deleteButton) {
 			String id=productidField.getText();
 			int confirmDelete=JOptionPane.showConfirmDialog(null, "Are you sure to delete?");
