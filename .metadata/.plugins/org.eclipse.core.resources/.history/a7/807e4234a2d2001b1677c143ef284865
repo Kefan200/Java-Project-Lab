@@ -111,7 +111,7 @@ public class Transaction extends JInternalFrame implements MouseListener,ActionL
 		this.add(centerPanel, BorderLayout.CENTER);
 		
 		this.setClosable(true);
-		this.setTitle("Transaction View");
+		this.setTitle("Transaction Management View");
 		this.setVisible(true);
 	}
 

@@ -385,7 +385,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		employeeroleField=new JTextField();
 		employeenameField=new JTextField();
 		employeeusernameField=new JTextField();
-
+//		employeestatusbox.setBounds(50, 50,90,20);
 		employeestatusField=new JTextField();
 		employeesalaryField=new JTextField();
 		
@@ -411,7 +411,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		centerPanel.add(employeeusernameField);
 		
 		centerPanel.add(employeestatus);
-
+//		centerPanel.add(employeestatusbox);
 		centerPanel.add(employeestatusField);
 		
 		centerPanel.add(employeesalary);
@@ -438,11 +438,15 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		
 		scrollpane = new JScrollPane(table);
 		
-
+//		dtm.addRow(newData);
+//		dtm.insertRow(0, newData2);
 		
 		northPanel.add(scrollpane);
 		
-
+//		southPanel.add(id);
+//		southPanel.add(name);
+//		southPanel.add(type);
+//		southPanel.add(cuisine);
 		
 		this.setLayout(new BorderLayout());
 		
@@ -451,7 +455,7 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 		this.add(centerPanel, BorderLayout.CENTER);
 		
 		this.setClosable(true);
-		this.setTitle("Manager View");
+		this.setTitle("Human Resource Management View");
 		this.setVisible(true);
 	}
 
@@ -531,6 +535,21 @@ public class Manager extends JInternalFrame implements MouseListener,ActionListe
 				JOptionPane.showMessageDialog(null, errorMessage,"Error",JOptionPane.ERROR_MESSAGE);
 			}
 //			
+//		//	String query =String.format("INSERT INTO employee VALUES(null,'%s','%s','%s','%s',%d)",role, name, username,status,salary);
+//			try {
+//				PreparedStatement ps=Connect.getInstance().prepareStatement("INSERT INTO employee "+"(role, name, username,status,salary) VALUES (?,?,?,?,?)");
+//				ps.setString(1, role);
+//				ps.setString(2, name);
+//				ps.setString(3, username);
+//				ps.setString(4, status);
+//				ps.setInt(5, salary);
+//				ps.executeUpdate();
+
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+////			con.execUpdate(query);
 
 		}else if(e.getSource()==updateButton){
 //			int id=Integer.parseInt(employeeidField.getText());

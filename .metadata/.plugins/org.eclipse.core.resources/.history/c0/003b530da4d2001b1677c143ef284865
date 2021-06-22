@@ -117,7 +117,7 @@ public class Product extends JInternalFrame implements MouseListener,ActionListe
 		this.add(centerPanel, BorderLayout.CENTER);
 		
 		this.setClosable(true);
-		this.setTitle("Product View");
+		this.setTitle("Product Management View");
 		this.setVisible(true);
 	}
 

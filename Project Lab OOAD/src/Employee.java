@@ -127,7 +127,7 @@ public class Employee extends JInternalFrame implements MouseListener,ActionList
 		this.add(centerPanel, BorderLayout.CENTER);
 		
 		this.setClosable(true);
-		this.setTitle("Human Resource Management View");
+		this.setTitle("Employee View");
 		this.setVisible(true);
 	}
 

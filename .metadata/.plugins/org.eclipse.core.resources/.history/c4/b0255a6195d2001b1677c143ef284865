@@ -26,7 +26,102 @@ public class MenuControllerManager {
 //		menumanager.setEntermonth(parsedentermonth);
 //		return true;
 //	}
-
+//	public static boolean insertMenu(String id,String quantity, String method) {
+//		int parsedId;
+//		int parsedQuantity;
+//		try {
+//			parsedId=Integer.parseInt(id);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="ID must be integer!";
+//			return false;
+//		}
+//		try {
+//			parsedQuantity=Integer.parseInt(quantity);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="Quantity must be integer!";
+//			return false;
+//		}
+//		if(method.isBlank()) {
+//			errorMessage="Method must be filled!";
+//			return false;
+//		}
+//
+//		
+//		MenuManager menumanager=new MenuManager();
+//		menumanager.setId(parsedId);
+//		menumanager.setQuantity(parsedQuantity);
+//		menumanager.setMethod(method);
+//	//	menutransactionmanagement.setDate(date);
+//		if(!menumanager.insert()) {
+//			errorMessage="Insert failed!";
+//			return false;
+//		}	
+//		return true;
+//	}
+//	public static boolean updateMenu(String id, String quantity, String method) {
+//		int parsedId;
+//		int parsedQuantity;
+//		try {
+//			parsedId=Integer.parseInt(id);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="ID must be integer!";
+//			return false;
+//		}
+//		try {
+//			parsedQuantity=Integer.parseInt(quantity);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="Quantity must be integer!";
+//			return false;
+//		}
+//		if(method.isBlank()) {
+//			errorMessage="Method must be filled!";
+//			return false;
+//		}
+//
+//		MenuManager menumanager=new MenuManager();
+//		menumanager.setId(parsedId);
+//		menumanager.setQuantity(parsedQuantity);
+//		menumanager.setMethod(method);
+////		menutransactionmanagement.setDate(date);
+//		if(!menumanager.update()) {
+//			errorMessage="Update failed!";
+//			return false;
+//		}
+//		return true;
+//	}
+//	public static boolean deleteMenu(String id) {
+//		int parsedId;
+//		try {
+//			parsedId=Integer.parseInt(id);
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			errorMessage="ID must be integer!";
+//			return false;
+//		}
+//		MenuManager menumanager=new MenuManager();
+//		menumanager.setId(parsedId);
+//		if(!menumanager.delete()) {
+//			errorMessage="Delete failed!";
+//			return false;
+//		}
+//		return true;
+//	}
+//	public static Manager showManager() {
+//		return new Manager();
+//	}
+//	public static HomePage showHomeFrame() {
+//		return new HomePage();
+//	}
+//}
 	public static boolean insertMenu(String role, String name, String username, String status, String salary) {
 		int parsedSalary;
 		if(role.isBlank()) {
